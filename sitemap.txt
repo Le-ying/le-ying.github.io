@@ -1,6 +1,9 @@
-http://example.com/link/index.html
-http://example.com/categories/index.html
-http://example.com/tags/index.html
-http://example.com/2022/12/07/The-first-passage-of-mine/
-http://example.com/2022/12/07/hello-world/
-http://example.com/
+https://serika-onoe.github.io/2022/12/09/Python%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%9B%BD%E5%AE%B6%E7%BB%9F%E8%AE%A1%E5%B1%80%E6%95%B0%E6%8D%AE/
+https://serika-onoe.github.io/tags/index.html
+https://serika-onoe.github.io/link/index.html
+https://serika-onoe.github.io/categories/index.html
+https://serika-onoe.github.io/2022/12/07/The-first-passage-of-mine/
+https://serika-onoe.github.io/2022/12/07/hello-world/
+https://serika-onoe.github.io/
+https://serika-onoe.github.io/tags/Python/
+https://serika-onoe.github.io/tags/%E7%88%AC%E8%99%AB/
