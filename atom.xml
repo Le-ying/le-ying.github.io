@@ -99,7 +99,7 @@
     <link href="https://serika-onoe.github.io/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
     <id>https://serika-onoe.github.io/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
     <published>2020-02-11T04:14:00.000Z</published>
-    <updated>2022-12-09T17:15:05.754Z</updated>
+    <updated>2022-12-10T02:33:24.757Z</updated>
     
     <content type="html"><![CDATA[<h1 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h1><p>记录博客是酝酿很久的想法，相信多数人作出这一决定也都经历了较长时间的拖延症hh。不过除了习惯性偷懒，也有出于对自身技术水平不自信的考量，毕竟大牛是极少数，多数人不过是在平均线上徘徊。</p><p>不过大脑做决定并不是纯粹理性的，反而主要凭感性。立下了靶子，定下来方向，理性思维才会积极地把行为合理化。</p><p>对为什么突发奇想开始记录博客，个人总结了如下动机：</p><ul><li><p>无论课内外，本人都已养成了动笔前先查阅大量资料的习惯。心里对那些具有开源精神的大牛们、前辈们充满敬意和感激。很多时候，一个简洁清晰的结论、一行高度概括的代码，单靠自己的探索往往要事倍功半，甚至还可能因为其在知识盲区(Unknown Unknown)而作不必要的苦恼，被前辈们留下的博客文章中不经意地一语道破，这样的瞬间简直不要太多。</p></li><li><p>从一个纯小白进化到现在一个在很多领域都有些入门经验的….小白来说，也很希望把当时掉进去的坑补上，最起码在前面做个警示，新人在环境搭建阶段没必要走弯路，把重心放在解决需求的程序调试阶段，实现更高的自我提升效率。</p></li><li><p>俗话说得好：“好记性不如烂笔头。” 之前看过一本讲如何高效记笔记的书，但纸面的笔记也常常无法翻阅。加上现在经常用手机浏览很多碎片化的知识点，得不到有效的整理，博客的存在比起私人笔记，也有种民主监督的意味在里头，避免个人认知偏差和局限。</p></li><li><p>还有《暗时间》，让我受益匪浅，学习的时候我也会经常想象如何把知识向一个小白讲解，而博客也相当于把这个过程实例化，可视化。</p></li></ul><h1 id="博客记录什么"><a href="#博客记录什么" class="headerlink" title="博客记录什么"></a>博客记录什么</h1><p>大学期间，课内学的很多是原理层面的东西，课外兴趣广泛，为避免犯蜻蜓点水般浅尝辄止的毛病，我总结所学以下几个方面的知识技术，抽空进行记录：</p><ul><li>编程语言类：C、Python、JAVA等</li><li>软件安装类: Android Studio，WordPress等</li><li>音频编辑类：pr，ps，au等等</li></ul><p>博客更新频率尽量保持在一周一两次，在此先作个纪念，日后若需要再加更改。</p><p>有诗云:“青山一道同云雨，明月何曾是两乡。”</p><p>愿与诸君共勉。</p>]]></content>
     
@@ -114,7 +114,9 @@
     <category term="summary" scheme="https://serika-onoe.github.io/categories/summary/"/>
     
     
-    <category term="first,introduction" scheme="https://serika-onoe.github.io/tags/first-introduction/"/>
+    <category term="first" scheme="https://serika-onoe.github.io/tags/first/"/>
+    
+    <category term="introduction" scheme="https://serika-onoe.github.io/tags/introduction/"/>
     
   </entry>
   

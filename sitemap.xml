@@ -4,7 +4,7 @@
   <url>
     <loc>https://serika-onoe.github.io/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
     
-    <lastmod>2022-12-09</lastmod>
+    <lastmod>2022-12-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -83,20 +83,6 @@
 
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/Python/</loc>
-    <lastmod>2022-12-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2022-12-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://serika-onoe.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/</loc>
     <lastmod>2022-12-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -118,27 +104,41 @@
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/first-introduction/</loc>
-    <lastmod>2022-12-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://serika-onoe.github.io/tags/%E7%A7%91%E7%A0%94%EF%BC%8C%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2022-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://serika-onoe.github.io/categories/project/</loc>
+    <loc>https://serika-onoe.github.io/tags/first/</loc>
     <lastmod>2022-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/introduction/</loc>
+    <lastmod>2022-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/Python/</loc>
+    <lastmod>2022-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
+    <lastmod>2022-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
   
   <url>
     <loc>https://serika-onoe.github.io/categories/collection/</loc>
@@ -149,6 +149,13 @@
   
   <url>
     <loc>https://serika-onoe.github.io/categories/summary/</loc>
+    <lastmod>2022-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/categories/project/</loc>
     <lastmod>2022-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
