@@ -110,21 +110,21 @@
 
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
+    <loc>https://serika-onoe.github.io/tags/Python/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -166,21 +166,21 @@
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/Python/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E4%BB%8B%E7%BB%8D/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -210,7 +210,14 @@
 
   
   <url>
-    <loc>https://serika-onoe.github.io/categories/%E4%BB%8B%E7%BB%8D/</loc>
+    <loc>https://serika-onoe.github.io/categories/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2022-12-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/categories/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E6%83%85/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -231,14 +238,7 @@
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/categories/%E9%A1%B9%E7%9B%AE%E8%AF%A6%E6%83%85/</loc>
-    <lastmod>2022-12-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/categories/%E6%80%BB%E7%BB%93/</loc>
+    <loc>https://serika-onoe.github.io/categories/%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2022-12-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
