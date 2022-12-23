@@ -281,7 +281,7 @@ src="https://github.com/serika-onoe/web-img/raw/main/Python_crawler/17.jpg" /></
     twikoo.init(Object.assign({
       el: '#twikoo-wrap',
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       onCommentLoaded: function () {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
       }
@@ -293,7 +293,7 @@ src="https://github.com/serika-onoe/web-img/raw/main/Python_crawler/17.jpg" /></
     if(!countELement) return
     twikoo.getCommentsCount({
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       urls: [window.location.pathname],
       includeReply: false
     }).then(function (res) {

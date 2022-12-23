@@ -224,7 +224,7 @@ id="概率递增不知道业内是不是叫水位">③概率递增（不知道�
     twikoo.init(Object.assign({
       el: '#twikoo-wrap',
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       onCommentLoaded: function () {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
       }
@@ -236,7 +236,7 @@ id="概率递增不知道业内是不是叫水位">③概率递增（不知道�
     if(!countELement) return
     twikoo.getCommentsCount({
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       urls: [window.location.pathname],
       includeReply: false
     }).then(function (res) {

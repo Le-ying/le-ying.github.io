@@ -214,7 +214,7 @@ Unknown)而作不必要的苦恼，被前辈们留下的博客文章中不经意
     twikoo.init(Object.assign({
       el: '#twikoo-wrap',
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       onCommentLoaded: function () {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
       }
@@ -226,7 +226,7 @@ Unknown)而作不必要的苦恼，被前辈们留下的博客文章中不经意
     if(!countELement) return
     twikoo.getCommentsCount({
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       urls: [window.location.pathname],
       includeReply: false
     }).then(function (res) {

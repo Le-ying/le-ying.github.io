@@ -483,7 +483,7 @@ app制作与安全性分析</span></a><ol class="toc-child"><li class="toc-item 
     twikoo.init(Object.assign({
       el: '#twikoo-wrap',
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       onCommentLoaded: function () {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
       }
@@ -495,7 +495,7 @@ app制作与安全性分析</span></a><ol class="toc-child"><li class="toc-item 
     if(!countELement) return
     twikoo.getCommentsCount({
       envId: 'https://rbmbrain.me/',
-      region: '',
+      region: 'ap-east-1',
       urls: [window.location.pathname],
       includeReply: false
     }).then(function (res) {
