@@ -133,6 +133,20 @@
   </url>
   
   <url>
+    <loc>https://serika-onoe.github.io/tags/%E7%A7%91%E7%A0%94/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://serika-onoe.github.io/tags/%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -161,14 +175,21 @@
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E7%A7%91%E7%A0%94/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/%E9%A1%B9%E7%9B%AE/</loc>
+    <loc>https://serika-onoe.github.io/tags/%E6%8A%BD%E5%8D%A1/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -190,27 +211,6 @@
   
   <url>
     <loc>https://serika-onoe.github.io/tags/%E4%BD%9C%E4%B8%9A/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/%E6%8A%BD%E5%8D%A1/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://serika-onoe.github.io/categories/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://serika-onoe.github.io/categories/%E6%B8%B8%E6%88%8F/</loc>
+    <loc>https://serika-onoe.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
