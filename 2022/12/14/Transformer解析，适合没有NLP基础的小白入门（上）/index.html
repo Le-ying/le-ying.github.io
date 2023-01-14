@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
 <meta property="article:published_time" content="2022-12-14T01:42:13.000Z">
-<meta property="article:modified_time" content="2023-01-12T01:09:27.066Z">
+<meta property="article:modified_time" content="2023-01-13T01:29:50.765Z">
 <meta property="article:author" content="龚泽颖">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="项目">
@@ -54,7 +54,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-01-12 09:09:27'
+  postUpdate: '2023-01-13 09:29:50'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,7 +144,7 @@
     }
     detectApple()
     })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CodeByZach/pace/themes/green/pace-theme-flash.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Kung's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kung's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer解析，适合没有NLP基础的小白入门 （上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-12T01:09:27.066Z" title="更新于 2023-01-12 09:09:27">2023-01-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer解析，适合没有NLP基础的小白入门 （上）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言">前言</h1>
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kung's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer解析，适合没有NLP基础的小白入门 （上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-13T01:29:50.765Z" title="更新于 2023-01-13 09:29:50">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer解析，适合没有NLP基础的小白入门 （上）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言">前言</h1>
 <p>我尝试在这篇文章，通过
 <strong>Encoder-Decoder-&gt;Attention-&gt;Transformer</strong>
 的顺序，为自己后续学习Transformer的不同模型变体打下基础。由于我此前没有NLP基础，所以可能更能够体会初学者的心路历程。为了方便读者阅读，我分为了上下两篇博客进行讲解，已经了解Attention基础的读者可以直接阅读（下）篇。</p>
@@ -409,12 +409,8 @@ class="math display">\[(Tom,0.6)(Chase,0.2) (Jerry,0.2)\]</span>
 </blockquote>
 <p>为了便于说明，我们假设对初始的Encoder-Decoder框架进行细化，Encoder,
 Decoder都采用RNN模型，这是比较常见的一种模型配置，架构图如下。</p>
-<figure>
 <img
-src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention3.jpg"
-alt="初始Encoder-Decoder常用框架" />
-<figcaption aria-hidden="true">初始Encoder-Decoder常用框架</figcaption>
-</figure>
+src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention3.jpg" />
 <center>
 <code>图6: 初始Encoder-Decoder常用框架</code>
 </center>
@@ -463,9 +459,12 @@ class="math inline">\(a_{ij}\)</span>代表在Target输出第i个单词时Source
 class="math inline">\(h_j\)</span>是Source输入句子中第j个单词的语义编码。</p>
 <p>Transformer的关键思想是Attention机制。相比于循环网络（如 RNN/LSTM
 ）必须一个接一个地查看每个单词（因此存在长期记忆问题），Transformer不仅考虑来自一个方向的输入，而且从整体上可以同时看到输入中的所有标记，以确定每个单词应该“注意”哪些内容。<strong>也就是说，我们期待给定一个输入Source之后，输出能同时看到所有的输入信息，然后每个输出的位置根据不同权重选择自己的注意点做输出。</strong></p>
-<p>这个类似于搜索引擎或者推荐系统的基本原理：以谷歌Google为例，用户给定需查询的问题(Query)，Google后台有各种文章标题(Key)和文章本身(Value)。通过定义并计算Query
-与 Key 的相关性，用户就可以找到最匹配的
-Value。当然Attention的目标不是通过Query得到Value，而是通过Query得到Value的加权和。<strong>Attention实际上做的就是数据库中的检索操作
+<p>这个类似于搜索引擎或者推荐系统的基本原理，以谷歌Google为例:</p>
+<ul>
+<li>用户给定需查询的问题(Query)</li>
+<li>Google后台有各种文章标题(Key)和文章本身(Value)</li>
+</ul>
+<p>通过定义并计算问题Query与文章标题Key的相关性，用户就可以找到最匹配的文章Value。当然Attention的目标不是通过Query得到Value，而是通过Query得到Value的加权和。因此我们可以认为，<strong>Attention实际上做的就是数据库中的检索操作
 (Attention is actually working as a retrieval operation in a database.
 )</strong></p>
 <img
@@ -550,6 +549,8 @@ Attention在计算过程中会直接将句子中任意两个单词的联系通�
 <li><p>通过添加多头机制来提高模型的泛化能力，从而增加了Encoder计算的并行性。</p></li>
 <li><p>通过添加位置编码来确保序列元素之间的相对顺序对于结果的影响。</p></li>
 </ol>
+<p>关于这部分内容，我会在下篇文章啊详细讲解Self
+Attention的工作原理。</p>
 <h1 id="结束语">结束语</h1>
 <p>在这篇文章中，我们已经了解了 Encoder-Decoder 和 Attention
 的概念，这些概念在自然语言处理中非常有用。
