@@ -110,48 +110,6 @@
 
   
   <url>
-    <loc>https://serika-onoe.github.io/tags/python/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/crawler/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/first/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/introduction/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/research/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/tags/project/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://serika-onoe.github.io/tags/acg/</loc>
     <lastmod>2023-01-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -194,6 +152,20 @@
   </url>
   
   <url>
+    <loc>https://serika-onoe.github.io/tags/first/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/introduction/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://serika-onoe.github.io/tags/%E7%A7%91%E7%A0%94/</loc>
     <lastmod>2023-01-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -202,6 +174,34 @@
   
   <url>
     <loc>https://serika-onoe.github.io/tags/%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/python/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/crawler/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/research/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/tags/project/</loc>
     <lastmod>2023-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -238,20 +238,6 @@
 
   
   <url>
-    <loc>https://serika-onoe.github.io/categories/project/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://serika-onoe.github.io/categories/summary/</loc>
-    <lastmod>2023-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://serika-onoe.github.io/categories/collection/</loc>
     <lastmod>2023-01-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -266,7 +252,21 @@
   </url>
   
   <url>
+    <loc>https://serika-onoe.github.io/categories/summary/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://serika-onoe.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://serika-onoe.github.io/categories/project/</loc>
     <lastmod>2023-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
