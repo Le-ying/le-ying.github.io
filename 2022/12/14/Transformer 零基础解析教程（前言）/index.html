@@ -1,16 +1,15 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Transformer 零基础解析教程，从Encoder-Decoder说起（1/4） | Kung's Blog</title><meta name="author" content="龚泽颖"><meta name="copyright" content="龚泽颖"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言 我尝试在这篇文章，通过 Encoder-Decoder-&gt;Attention-&gt;Transformer 的顺序，为自己后续学习Transformer的不同模型变体打下基础。由于我此前没有NLP基础，所以可能更能够体会初学者的心路历程。为了方便读者阅读，我通过一共四篇文章进行Transformer的系列讲解，已经掌握Encoder-Decoder和Attention基础的读者">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4） | 空之影的技术博客</title><meta name="author" content="空之影"><meta name="copyright" content="空之影"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Transformer教程系列介绍 大模型的发展正在逐渐从单一模态数据输入向多模态数据输入演进，文本、语音、图像、视频等多模态的联合训练学习，不同模态之间形成有效互补，这将有助于提升模型的效果和泛化能力，为迈向通用人工智能奠定更加坚实的一步。而提到多模态的算法模型，就不得不提到大名鼎鼎的 Transformer。 2017年, Google研究团队发表了论文 《Attention Is A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Transformer 零基础解析教程，从Encoder-Decoder说起（1&#x2F;4）">
+<meta property="og:title" content="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）">
 <meta property="og:url" content="https://serika-onoe.github.io/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/index.html">
-<meta property="og:site_name" content="Kung&#39;s Blog">
-<meta property="og:description" content="前言 我尝试在这篇文章，通过 Encoder-Decoder-&gt;Attention-&gt;Transformer 的顺序，为自己后续学习Transformer的不同模型变体打下基础。由于我此前没有NLP基础，所以可能更能够体会初学者的心路历程。为了方便读者阅读，我通过一共四篇文章进行Transformer的系列讲解，已经掌握Encoder-Decoder和Attention基础的读者">
+<meta property="og:site_name" content="空之影的技术博客">
+<meta property="og:description" content="Transformer教程系列介绍 大模型的发展正在逐渐从单一模态数据输入向多模态数据输入演进，文本、语音、图像、视频等多模态的联合训练学习，不同模态之间形成有效互补，这将有助于提升模型的效果和泛化能力，为迈向通用人工智能奠定更加坚实的一步。而提到多模态的算法模型，就不得不提到大名鼎鼎的 Transformer。 2017年, Google研究团队发表了论文 《Attention Is A">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg">
 <meta property="article:published_time" content="2022-12-14T01:42:13.000Z">
-<meta property="article:modified_time" content="2023-02-05T04:36:33.232Z">
-<meta property="article:author" content="龚泽颖">
+<meta property="article:modified_time" content="2023-02-05T12:17:54.461Z">
+<meta property="article:author" content="空之影">
 <meta property="article:tag" content="科研">
-<meta property="article:tag" content="项目">
 <meta property="article:tag" content="transformer">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://serika-onoe.github.io/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
@@ -50,12 +49,12 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Transformer 零基础解析教程，从Encoder-Decoder说起（1/4）',
+  title: 'Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-02-05 12:36:33'
+  postUpdate: '2023-02-05 20:17:54'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,62 +143,85 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CodeByZach/pace/themes/green/pace-theme-flash.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Kung's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kung's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer 零基础解析教程，从Encoder-Decoder说起（1/4）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-05T04:36:33.232Z" title="更新于 2023-02-05 12:36:33">2023-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer 零基础解析教程，从Encoder-Decoder说起（1/4）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言">前言</h1>
-<p>我尝试在这篇文章，通过
-<strong>Encoder-Decoder-&gt;Attention-&gt;Transformer</strong>
-的顺序，为自己后续学习Transformer的不同模型变体打下基础。由于我此前没有NLP基础，所以可能更能够体会初学者的心路历程。为了方便读者阅读，我通过一共四篇文章进行Transformer的系列讲解，已经掌握Encoder-Decoder和Attention基础的读者可以直接阅读（下）篇。</p>
-<p>同时我发现使用Chatgpt进行代码讲解对一个新手来说真的非常友好，本系列文章有相当一部分代码讲解都是经过Chatgpt辅助我理解消化的。读者可以尝试一下<a
-target="_blank" rel="noopener" href="https://chat.openai.com/">Chatgpt</a>，我一般尊称它为“Chat老师”，它是一个非常耐心的老师，（最重要的，它还是免费哒！）这让我想起了柏拉图或者孔夫子的教学方式——通过青年问禅师的对话体，来回答读者的困惑并启发更深层次的哲学思考。</p>
-<p><strong>Encoder-Decoder, Attention, Transformer
-三者的关系简述</strong></p>
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CodeByZach/pace/themes/green/pace-theme-flash.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="空之影的技术博客" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">空之影的技术博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-05T12:17:54.461Z" title="更新于 2023-02-05 20:17:54">2023-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0-%E6%95%99%E7%A8%8B/">笔记, 教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="transformer教程系列介绍">Transformer教程系列介绍</h1>
+<p>大模型的发展正在逐渐从单一模态数据输入向多模态数据输入演进，文本、语音、图像、视频等多模态的联合训练学习，不同模态之间形成有效互补，这将有助于提升模型的效果和泛化能力，为迈向通用人工智能奠定更加坚实的一步。而提到多模态的算法模型，就不得不提到大名鼎鼎的
+Transformer。</p>
+<p>2017年, <strong>Google研究团队</strong>发表了论文 <strong>《Attention
+Is All You
+Need》</strong>，Transformer横空出世，并很快成为<strong>自然语言处理(NLP)</strong>领域的标杆模型，如机器翻译及后续的BERT、GPT系列等NLP大模型。Transformer也被应用到<strong>计算机视觉(CV)</strong>领域，用于图像分类、物体检测、图像生成和视频处理等任务，代表性如DERT、ViT等。此外，Transforme也被应用到了<strong>语音领域(ASR)</strong>，用于语音识别、语音合成、语音增强和音乐生成等任务。此外，NLP、视觉和语音构成的<strong>多模态</strong>场景，也是近年来Transformer应用的热点方向，例如视觉问答、视觉常识推理、语音到文本翻译和文本到图像生成等。</p>
+<p><strong>本文主要讲解Transformer之前的两个技术基础：Encoder-Decoder
+框架和 Attention
+机制。</strong>已经掌握Encoder-Decoder和Attention基础的读者可以直接阅读后续篇章。</p>
+<blockquote>
+<p>本博客的 Transformer 系列文章共计四篇，导航如下：</p>
+</blockquote>
+<ul>
+<li><p><a
+target="_blank" rel="noopener" href="http://localhost:4000/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/">Transformer
+零基础解析教程，从Encoder-Decoder架构说起（1/4）<strong>本篇</strong></a></p></li>
+<li><p><a
+href="https://serika-onoe.github.io/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/">Transformer
+零基础解析教程，剥洋葱般层层展开内在原理（2/4）</a></p></li>
+<li><p><a
+href="https://serika-onoe.github.io/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/">Transformer
+零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a></p></li>
+<li><p><a
+href="https://serika-onoe.github.io/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/">Transformer
+零基础解析教程，完整版代码最终挑战（4/4）</a></p></li>
+</ul>
+<h1 id="前言">前言</h1>
+<blockquote>
+<p>We propose a new simple network architecture, the
+<strong>Transformer</strong>, based solely on <strong>attention
+mechanisms</strong>, dispensing with recurrence and convolutions
+entirely.</p>
+<p><em>Reference: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J.,
+Jones, L., Gomez, A.N., Kaiser, Ł., Polosukhin, I. (2017). </em><br>
+<em>Attention is all you need.</em></p>
+</blockquote>
+<p>结合论文原文的初始定义，我们可以简单划分 Encoder-Decoder, Attention,
+Transformer 三者的关系：</p>
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">概念</th>
 <th style="text-align: center;">说明</th>
-<th style="text-align: center;">应用</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Encoder-Decoder</td>
 <td style="text-align: center;">解决序列-序列问题的框架</td>
-<td style="text-align: center;">文本摘要、文本翻译、问答系统</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Attention</td>
-<td
-style="text-align: center;">改善Encoder-Decoder输出结果的机制，主要是帮助解码器更好地生成输出序列</td>
-<td
-style="text-align: center;">文本翻译、问答系统、图像标注、语音识别</td>
+<td style="text-align: center;">改善Encoder-Decoder输出结果的机制</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Transformer</td>
 <td
-style="text-align: center;">解决序列-序列问题的架构，使用了Encoder-Decoder框架和Attention机制</td>
-<td style="text-align: center;">NLP的新架构，目前往多模态方向拓展</td>
+style="text-align: center;">用于解决序列-序列问题<br>使用了Encoder-Decoder框架和Attention机制</td>
 </tr>
 </tbody>
 </table>
 <h1 id="encoder-decoder框架">Encoder-Decoder框架</h1>
 <h2 id="简介">简介</h2>
-<p>对于自然语言处理(NLP)领域的典型问题，都可以简化为处理一个句子对&lt;Source,Target&gt;：</p>
+<p>对于自然语言处理(NLP)领域的典型问题，都可以简化为处理一个句子对&lt;Source,Target&gt;，比如：</p>
 <ul>
 <li>文本摘要，Source是一篇文章，Target是概括性的几句描述语句</li>
-<li>文本翻译，Source是中文句子，Target是英文句子</li>
-<li>问答系统，Source是一句问句，Target是一句回答</li>
+<li>文本翻译，Source是待翻译的句子，Target是翻译后的句子</li>
+<li>问答系统，Source是一段提问，Target是一段回答</li>
 </ul>
-<p>我们的目标是给定输入句子<code>Source</code>，通过Encoder-Decoder框架，最后生成目标句子<code>Target</code>。Source和Target分别由各自的单词序列构成。这其中的Encoder-Decoder是一种用于处理序列-序列问题的框架，编码器(Encoder)输入一个序列并输出一个编码，解码器(Decoder)使用这个编码来生成一个输出序列。</p>
-<p>Encoder-Decoder框架不仅仅在文本领域广泛使用，在语音识别、图像处理等领域也经常使用。区别在于，文本处理和语音识别的Encoder部分通常采用RNN模型，图像处理的Encoder一般采用CNN模型。用句子对&lt;Source,Target&gt;举例来说就是：</p>
+<p>我们的目标是给定输入句子<code>Source</code>，通过Encoder-Decoder框架，最后生成目标句子<code>Target</code>。Source和Target分别由各自的单词序列构成。这其中的Encoder-Decoder是一种用于处理序列-序列问题的框架，编码器(<code>Encoder</code>)输入一个序列并输出一个编码，解码器(<code>Decoder</code>)使用这个编码来生成一个输出序列。</p>
+<p>Encoder-Decoder框架不仅仅在文本领域广泛使用，在语音识别、图像处理等领域也经常使用。区别在于，文本处理和语音识别的Encoder部分通常采用RNN模型，图像处理的Encoder一般采用CNN模型。用序列对&lt;Source,Target&gt;举例来说：</p>
 <ul>
-<li>语音识别，Source是语音流，Target是对应的文本信息</li>
-<li>图像描述，Source是一副图片，Target是图片内容的描述语。</li>
+<li>语音识别，Source是一段语音流，Target是对应的文本信息</li>
+<li>图像描述，Source是一幅图片，Target是图片内容的描述语。</li>
 </ul>
 <h2 id="原理">原理</h2>
 <p>举个更具体的例子，我们以翻译给定的输入句子<span
@@ -224,7 +246,7 @@ class="math inline">\(X\)</span>的中间语义表示<span
 class="math inline">\(C\)</span>和之前已经生成的历史信息<span
 class="math inline">\(y_1, y_2, \cdots,
 y_{i-1}\)</span>来生成i时刻要生成的单词<span
-class="math inline">\(yi\)</span>。</p>
+class="math inline">\(y_i\)</span>。</p>
 <p><span class="math display">\[y_i = G(C, y_1, y_2, \cdots, y_{i-1})
 \]</span></p>
 <p>每个<span
@@ -232,7 +254,7 @@ class="math inline">\(y_i\)</span>都依次这么产生，最终看起来就是�
 class="math inline">\(X\)</span>生成了目标句子<span
 class="math inline">\(Y\)</span>。</p>
 <p>Encoder-Decoder是通用的计算框架，Encoder,
-Decoder具体用什么模型，都可以自己选择。<code>(因此这可以是一个创新点)</code>Encoder-Decoder架构图如下</p>
+Decoder具体用什么模型，都可以自己选择。<code>(因此这可以是创新点)</code></p>
 <p><img
 src="https://github.com/serika-onoe/web-img/raw/main/Transformer/encoder-decoder.jpg"
 title="Encoder-Decoder架构图" /></p>
@@ -241,16 +263,19 @@ title="Encoder-Decoder架构图" /></p>
 </center>
 <h2 id="经典decoder形式及其问题">经典Decoder形式及其问题</h2>
 其中经典的Decoder有两种形式，对应两篇论文：<br />
-<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1406.1078">[论文1]Cho et al., 2014 .
-Learning Phrase Representations using RNN Encoder-Decoder for
-Statistical Machine Translation.</a><br />
+<strong>[论文1]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1406.1078">Kyunghyun Cho, Bart van
+Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger
+Schwenk, Yoshua Bengio: “Learning Phrase Representations using RNN
+Encoder-Decoder for Statistical Machine Translation”, 2014;
+[http://arxiv.org/abs/1406.1078 arXiv:1406.1078].</a><br />
 <img
 src="https://img-blog.csdnimg.cn/20200322154916564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RpbmsxOTk1,size_16,color_FFFFFF,t_70" /><br />
 
 <center>
 <code>图2: 输入序列的语义编码C均等影响输出序列</code>
 </center>
-<p><br/><br/> 论文1中指出，Ecoder、Decoder均使用了RNN，因为语义编码<span
+<p><br> 论文1中指出，Ecoder、Decoder均使用了RNN，因为语义编码<span
 class="math inline">\({C}\)</span>包含了整个输入序列的信息，所以在计算每一时刻的输出<span
 class="math inline">\(y_t\)</span>时，都应该输入语义编码<span
 class="math inline">\({C}\)</span>，也就是在解码的每一步都引入输入信息<span
@@ -265,12 +290,14 @@ class="math display">\[h_{&lt;t&gt;}=f(h_{t-1},y_{t-1},C)\]</span></p>
 <li><span class="math inline">\(t\)</span>时刻的输出概率为</li>
 </ul>
 <p><span
-class="math display">\[p(y_t|y_{t-1},y_{t-2},\cdot,y_{1},C)=g(h_{&lt;t&gt;},y_{t−1},C)\]</span></p>
-<p><span
-class="math inline">\(h_t\)</span>为当前t时刻的隐藏层的值，<span
+class="math display">\[p(y_t|y_{t-1},y_{t-2},\cdots,y_{1},C)=g(h_{&lt;t&gt;},y_{t−1},C)\]</span></p>
+<p><span class="math inline">\(h_t\)</span>为当前<span
+class="math inline">\(t\)</span>时刻的隐藏层的值，<span
 class="math inline">\(y_{t-1}\)</span>为上一时刻的预测输出。</p>
-<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">[论文2]Sutskever et al., 2014.
-Sequence to Sequence Learning with Neural Networks.</a><br />
+<strong>[论文2]</strong>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Ilya
+Sutskever, Oriol Vinyals, Quoc V. Le: “Sequence to Sequence Learning
+with Neural Networks”, 2014; [http://arxiv.org/abs/1409.3215
+arXiv:1409.3215].</a><br />
 <img src="https://img-blog.csdnimg.cn/20200322162508369.png" /><br />
 
 <center>
@@ -315,13 +342,12 @@ class="math inline">\(C\)</span>都是一样的，没有任何区别。</p>
 <p>既然只引入一个<span
 class="math inline">\(C\)</span>不行，那咱们就用多个<span
 class="math inline">\(C\)</span>，让不同的语义编码<span
-class="math inline">\(C_i\)</span>对应生成目标句子的不同单词。这个时候我们就引入了改善Encoder-Decoder输出结果的Attention机制。</p>
+class="math inline">\(C_i\)</span>对应生成目标句子的不同单词。这个时候我们就引入了改善Encoder-Decoder输出结果的<code>Attention</code>机制。</p>
 <h1 id="attention机制">Attention机制</h1>
 <h2 id="简介-1">简介</h2>
-<p>总结一下前文：在文本翻译的Encoder-Decoder模型中，编码器会输出一个向量序列，而解码器则需要逐步生成目标语言的单词。其中的每一步，解码器都需要根据之前生成的单词和编码器的输出来预测下一个单词。为了让解码器能够更好地使用编码器的输出，我们可以使用
+<p>总结一下前文：在文本翻译的Encoder-Decoder模型中，编码器会输出一个向量序列，而解码器则需要逐步生成目标语言的单词。其中的每一步，解码器都需要根据之前生成的单词和编码器的输出来预测下一个单词，而对于编码器的输出，解码器缺少关注的重点。为了让解码器能够更好地使用编码器的输出，我们可以使用
 Attention 机制。</p>
-<p>Attention
-机制可以让解码器在每一步时重点关注编码器输出的某些部分，这样解码器就可以更准确地生成目标语言的单词。同时，编码器也可以使用Attention机制。在编码器的每一层中，它会使用自注意力机制来注意输入序列的不同部分。</p>
+<p>Attention机制可以让解码器在每一步时重点关注编码器输出的某些部分，这样解码器就可以更准确地生成目标语言的单词。同时，编码器也可以使用Attention机制。在编码器的每一层中，它会使用自注意力机制来注意输入序列的不同部分。</p>
 <h2 id="原理-1">原理</h2>
 <img
 src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" />
@@ -340,7 +366,8 @@ class="math inline">\(Y_2\)</span>时，<span
 class="math inline">\(Y_2\)</span>的注意力集中在<span
 class="math inline">\(C_2\)</span>上，那咱们就用<span
 class="math inline">\(C_2\)</span>作为语义编码，以此类推...</p>
-<h3 id="问题一">问题一</h3>
+<h3
+id="问题一关于注意力应该如何分配">问题一：关于注意力应该如何分配</h3>
 <blockquote>
 <p>如何判断每次在做解码的时候，注意力应该放在输入序列的哪个位置呢？即怎么计算出<span
 class="math inline">\(C1，C2，...Cn\)</span>呢？</p>
@@ -351,9 +378,13 @@ class="math inline">\(C1，C2，...Cn\)</span>呢？</p>
 \]</span>
 每个英文单词的概率代表了翻译当前单词“杰瑞”时，注意力分配模型分配给不同英文单词的注意力大小。这对于正确翻译目标单词是会有帮助的。因为针对输入的每个单词，输出的不同位置都引入了新的信息，并且放大了对应输入部分的注意力概率。</p>
 <p>而这样做的前提在于，目标句子中的每个单词都应该学会分配对应的源句子中每个单词的注意力概率信息。也就是说，在生成每个单词<span
-class="math inline">\(Y_i\)</span>的时候，源句子中对应的相关单词概率会高于无关的单词。我的理解是，Attention的意思就是让模型学会在输出下一个单词时，对输入序列与之相关的单词投入更多的注意力。这就实现了将相同的中间语义表示<span
-class="math inline">\(C\)</span>，替换成了根据当前生成单词而不断变化的<span
-class="math inline">\(C_i\)</span>。<strong>这是Attention机制的关键</strong>，具体的实现过程举例如下：</p>
+class="math inline">\(Y_i\)</span>的时候，源句子中对应的相关单词概率会高于无关的单词。</p>
+<blockquote>
+<p>个人理解：Attention的意思就是让模型学会在输出下一个单词时，对输入序列与之相关的单词投入更多的注意力，从而实现了将相同的中间语义表示<span
+class="math inline">\(C\)</span>替换成了根据当前生成单词而不断变化的<span
+class="math inline">\(C_i\)</span>。（<strong>这是Attention机制的关键</strong>）</p>
+</blockquote>
+<p>具体的实现过程举例如下：</p>
 <p>请观察下目标句子Target中每个单词的生成过程，和原模型相比，<span
 class="math inline">\(C\)</span>变成了<span
 class="math inline">\(C_i\)</span>：</p>
@@ -387,12 +418,13 @@ class="math inline">\(a_{ij}\)</span>代表在Target输出第i个单词时Source
 <li><p><span
 class="math inline">\(h_j\)</span>是Source输入句子中第j个单词的语义编码。</p>
 <p><strong>假设<span
-class="math inline">\(C_i\)</span>指的就是上面例子所说的“汤姆”</strong></p></li>
+class="math inline">\(C_i\)</span>指的就是上面例子所说的“<span
+class="math inline">\(C_{汤姆}\)</span>”</strong></p></li>
 <li><p><span class="math inline">\(L_x=3\)</span></p></li>
-<li><p><span
-class="math inline">\(h_1=f2(&#39;Tom&#39;)，h_2=f2(&#39;Chase&#39;),h_3=f2(&#39;Jerry&#39;)\)</span></p></li>
-<li><p><span
-class="math inline">\(a_{11}=0.6,a_{12}=0.2,a_{13}=0.2\)</span></p></li>
+<li><p><span class="math inline">\(h_1=f2(&#39;Tom&#39;),
+h_2=f2(&#39;Chase&#39;), h_3=f2(&#39;Jerry&#39;)\)</span></p></li>
+<li><p><span class="math inline">\(a_{11}=0.6, a_{12}=0.2,
+a_{13}=0.2\)</span></p></li>
 </ul>
 由此可见，我们通过一个加权求和函数，计算出<span
 class="math inline">\(C_i\)</span>，也就是不同解码位置对应的注意力概率分配，在这个例子中这个函数记作<span
@@ -403,9 +435,10 @@ src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention2.jpg"
 <center>
 <code>图5: g函数过程可视化</code>
 </center>
-<h3 id="问题二">问题二</h3>
+<h3
+id="问题二关于具体注意力概率的计算">问题二：关于具体注意力概率的计算</h3>
 <blockquote>
-<p>生成目标句子某个单词的时候，我们如何知道这个单词的注意力概率分配值各是多少呢？</p>
+<p>生成目标句子某个单词的时候，我们如何知道这个单词的注意力概率计算值各是多少呢？</p>
 <p>比如在生成“汤姆”这个中文翻译词的时候，模型生成了“汤姆”对应的输入句子Source中各个单词的概率分布：<span
 class="math display">\[(Tom,0.6)(Chase,0.2) (Jerry,0.2)\]</span>
 这个分布是如何得到的呢？</p>
@@ -444,22 +477,27 @@ Attention</strong>，所有的数据都会被注意到，并计算出相应的�
 Attention</strong>，会在生成注意力权重后筛选掉一部分不符合条件的注意力，让它的注意力权值为0，即可以理解为不再注意这些不符合条件的部分。</p>
 <h2 id="本质">本质</h2>
 <p>如果把Attention机制从上文讲述例子中的Encoder-Decoder框架中剥离，并进一步做抽象，可以更容易看懂Attention机制的本质思想。</p>
-<h3 id="从一个问题说起">从一个问题说起</h3>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">[论文3]Ashish Vaswani.,
-2017 . Attention Is All You Need</a> 这篇论文讨论了使用Query,
-Key和Value向量计算Attention的方法。</p>
+<p><strong>[论文3]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Ashish Vaswani, Noam Shazeer,
+Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz
+Kaiser, Illia Polosukhin: “Attention Is All You Need”, 2017;
+[http://arxiv.org/abs/1706.03762 arXiv:1706.03762].</a>
+这篇论文讨论了使用Query, Key和Value向量计算Attention的方法。</p>
 <blockquote>
-<p>那么，QKV向量分别代表什么，为什么要使用这三个向量？</p>
+<p>Q, K, V向量分别代表什么，为什么要使用这三个向量？</p>
 </blockquote>
-<p>Attention简单来说就是一些值的加权平均值，就像“汤姆追逐杰瑞”例子中提到的：
-<span class="math display">\[
+<p>Attention简单来说就是一些值的加权平均值，就像“汤姆追逐杰瑞”例子中提到的：</p>
+<p><span class="math display">\[
 C_i = ∑_{j=1}^{Lx}a_{ij}h_j
-\]</span><br />
-- <span class="math inline">\(L_x\)</span>代表输入句子Source的长度 -
-<span
-class="math inline">\(a_{ij}\)</span>代表在Target输出第i个单词时Source输入句子中第j个单词的注意力分配系数
-- <span
-class="math inline">\(h_j\)</span>是Source输入句子中第j个单词的语义编码。</p>
+\]</span></p>
+<ul>
+<li><span
+class="math inline">\(L_x\)</span>代表输入句子Source的长度</li>
+<li><span
+class="math inline">\(a_{ij}\)</span>代表在Target输出第i个单词时Source输入句子中第j个单词的注意力分配系数</li>
+<li><span
+class="math inline">\(h_j\)</span>是Source输入句子中第j个单词的语义编码。</li>
+</ul>
 <p>Transformer的关键思想是Attention机制。相比于循环网络（如 RNN/LSTM
 ）必须一个接一个地查看每个单词（因此存在长期记忆问题），Transformer不仅考虑来自一个方向的输入，而且从整体上可以同时看到输入中的所有标记，以确定每个单词应该“注意”哪些内容。<strong>也就是说，我们期待给定一个输入Source之后，输出能同时看到所有的输入信息，然后每个输出的位置根据不同权重选择自己的注意点做输出。</strong></p>
 <p>这个类似于搜索引擎或者推荐系统的基本原理，以谷歌Google为例:</p>
@@ -467,46 +505,55 @@ class="math inline">\(h_j\)</span>是Source输入句子中第j个单词的语义
 <li>用户给定需查询的问题(Query)</li>
 <li>Google后台有各种文章标题(Key)和文章本身(Value)</li>
 </ul>
-<p>通过定义并计算问题Query与文章标题Key的相关性，用户就可以找到最匹配的文章Value。当然Attention的目标不是通过Query得到Value，而是通过Query得到Value的加权和。因此我们可以认为，<strong>Attention实际上做的就是数据库中的检索操作
-(Attention is actually working as a retrieval operation in a database.
-)</strong></p>
+<p>通过定义并计算问题Query与文章标题Key的相关性，用户就可以找到最匹配的文章Value。当然Attention的目标不是通过Query得到Value，而是通过Query得到Value的加权和。因此我们可以认为，<strong>Attention实际上做的就是数据库中的检索操作</strong>
+<em>(Attention is actually working as a retrieval operation in a
+database. )</em></p>
 <img
 src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention_bz1.jpg" />
 <center>
 <code>图8: Attention机制的本质思想</code>
 </center>
 <p><br/><br/>
-所以我们可以这样来看待Attention机制：我们的输入、输出记为句子对&lt;Source,Target&gt;。将Source中的构成元素想象成是由一系列的&lt;Key,Value&gt;数据对构成，此时给定Target中的某个元素Query，通过计算Query和各个Key的相似性或者相关性，得到每个Key对应Value的权重系数，然后对Value进行加权求和，即得到了最终的Attention数值。所以<strong>本质上Attention机制是对Source中元素的Value值进行加权求和，而Query和Key用来计算对应Value的权重系数。</strong>即可以将其本质思想改写为如下公式，（其中，<span
-class="math inline">\(L_x=||Source||\)</span>代表Source的长度）：</p>
+所以我们可以这样来看待Attention机制：我们的输入、输出记为句子对&lt;Source,Target&gt;。将Source中的构成元素想象成是由一系列的&lt;Key,Value&gt;数据对构成，此时给定Target中的某个元素Query，通过计算Query和各个Key的相似性或者相关性，得到每个Key对应Value的权重系数，然后对Value进行加权求和，即得到了最终的Attention数值。所以<strong>本质上Attention机制是对Source中元素的Value值进行加权求和，而Query和Key用来计算对应Value的权重系数。</strong>即可以将其本质思想改写为如下公式：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200322195829296.png" /></p>
-<p>Key和Value具有强关联性，所以它们也可以是同一个东西，比如Google搜索理论上可以直接搜索到文章本身，而不用列出文章的标题列表。再比如“汤姆追逐杰瑞”的翻译例子里，Source中的Key和Value指向的都是同一个东西：输入句子中每个单词对应的语义编码<span
-class="math inline">\(C\)</span>或<span
-class="math inline">\(C_i\)</span>，因此可能不容易看出这种能够体现本质思想的结构。</p>
-<p>当然，从概念上理解，把Attention仍然理解为从大量信息中有选择地筛选出少量重要信息并聚焦到这些重要信息上，忽略大多不重要的信息，这种思路仍然成立。聚焦的过程体现在权重系数的计算上，权重越大越聚焦于其对应的Value值上，即权重代表了信息的重要性，而Value是其对应的信息。</p>
+<ul>
+<li><span class="math inline">\(L_x=||Source||\)</span>
+代表Source的长度</li>
+</ul>
+<p>Key和Value具有强关联性，所以它们也可以是同一个东西，比如Google搜索理论上可以直接搜索到文章本身，而不用列出文章的标题列表。再比如“汤姆追逐杰瑞”的翻译例子里，Key和Value指向的都是同一个东西：输入句子中每个单词对应的语义编码<span
+class="math inline">\(C_i\)</span>。</p>
+<p>当然，从概念上把Attention理解为从大量信息中有选择地筛选出少量重要信息，并聚焦到这些重要信息上，忽略大多不重要的信息，这种思路仍然成立。聚焦的过程体现在权重系数的计算上，权重越大越聚焦于其对应的Value值上，即权重代表了信息的重要性，而Value是其对应的信息。</p>
 <p>刚才提到“Attention实际上做的就是数据库中的检索操作”，因此也可以用寻址类比检索过程：我们将Attention机制看作一种软寻址(Soft
 Addressing):
 Source可以看作存储器内存储的内容，元素由地址Key和值Value组成，当前有个<span
 class="math inline">\(Key=Query\)</span>的查询，目的是取出存储器中对应的Value值，即Attention数值。通过Query和存储器内元素Key的地址进行相似性比较来寻址，之所以说是软寻址，是因为不像一般寻址只从存储内容里面找出一条内容，而是可能从每个Key地址都会取出内容，取出内容的重要性根据Query和Key的相似性来决定，之后对Value进行加权求和，这样就可以取出最终的Value值，也即Attention值。</p>
+<p>我忽然想到可以用日常的例子来类比，比如解密型的密室逃脱游戏，玩家需要像侦探一样根据提示，在不同的地方找到一个个线索或道具，每个线索都可能和最终的逃脱方法有关，（当然越后面阶段拿到的线索或者道具有可能权重越高），最终合理运用推理逃出生天。</p>
 <h2 id="计算过程">计算过程</h2>
 <p>Attention机制的具体计算过程，如果对目前大多数方法进行抽象的话，可以将其归纳为两个过程：</p>
 <ol type="1">
 <li>根据Query和Key计算权重系数
 <ul>
 <li>根据Query和Key计算两者的相似性或者相关性</li>
-<li>对第一阶段的原始分值进行归一化处理</li>
+<li>对相似性的原始分值进行归一化处理，得到</li>
 </ul></li>
 <li>根据权重系数对Value进行加权求和。</li>
 </ol>
-<p><img
-src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention_bz2.jpg" /></p>
-<p>在该图中，把上述的第一个过程细化为两个阶段。因此三个阶段分别为</p>
+<p>我们也可以把上述的第一个过程细化为两个阶段。因此三个阶段分别为</p>
 <ul>
 <li>阶段1：Query与每一个Key计算相似性得到相似性评分<span
-class="math inline">\(s\)</span></li>
-<li>阶段2：将<span
-class="math inline">\(s\)</span>评分进行softmax转换成[0,1]之间的概率分布</li>
-<li>阶段3：将[a1,a2,a3…an]作为权值矩阵对Value进行加权求和得到最后的Attention值</li>
+class="math inline">\(s1, s2, s3, \cdots, s_i\)</span></li>
+<li>阶段2：将<span class="math inline">\(s1, s2, s3, \cdots,
+s_i\)</span>评分进行softmax转换成[0,1]之间的概率分布</li>
+<li>阶段3：将<span class="math inline">\([a1, a2, a3, \cdots,
+a_n]\)</span>作为权值矩阵对Value进行加权求和，得到最后的Attention值</li>
 </ul>
+<p>如下图所示，</p>
+<img
+src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention_bz2.jpg" />
+<center>
+<code>图9: 图解Attention机制的计算过程</code>
+</center>
+<p><br/><br/></p>
 <h3 id="阶段1">阶段1</h3>
 <p>在阶段1，可以引入不同的函数和计算机制，根据Query和某个<span
 class="math inline">\(Key_i\)</span>，计算两者的相似性或者相关性，最常见的方法包括：求两者的向量点积、求两者的向量Cosine相似性或者通过再引入额外的神经网络来求值：</p>
@@ -525,7 +572,7 @@ class="math inline">\(Value_i\)</span>对应的权重系数，然后阶段3进�
 <ol type="1">
 <li><p><strong>可并行计算：</strong>Attention机制解决了RNN不能并行计算的问题。这里需要说明一下，咱们在训练Attention机制的seq2seq模型的时候，decoder并不是说预测出了一个词，然后再把这个词作为下一个输入，而是有监督训练：咱们已经有了target的数据，所以是可以并行输入的，可以并行计算decoder的每一个输出，但是实际做预测的时候，是没有target数据的，这个时候就需要基于上一个时间节点的预测值来当做下一个时间节点decoder的输入。所以节省的是训练的时间。</p></li>
 <li><p><strong>改善长序列处理能力：</strong>Attention机制可以帮助模型在处理长序列时，选择关注其中重要的部分，从而提高模型的准确性。</p></li>
-<li><p><strong>模型权重可视化：</strong>Attention机制通过计算权重系数，能够得到每个输入序列中元素对输出结果的重要性，这有助于我们理解模型学到了什么。</p></li>
+<li><p><strong>模型权重可视化：</strong>Attention机制通过计算权重系数，能够得到每个输入序列中元素对输出结果的重要性，将权重系数可视化比以往方法有助于我们理解模型学到了什么。</p></li>
 </ol>
 <p><strong>缺点：</strong></p>
 <p>1.<strong>Encoder部分未实现并行运算：</strong>Encoder部分依旧采用的是RNN，LSTM这些按照顺序编码的模型，不够完美。</p>
@@ -552,14 +599,15 @@ Attention在计算过程中会直接将句子中任意两个单词的联系通�
 <li><p>通过添加多头机制来提高模型的泛化能力，从而增加了Encoder计算的并行性。</p></li>
 <li><p>通过添加位置编码来确保序列元素之间的相对顺序对于结果的影响。</p></li>
 </ol>
-<p>关于这部分内容，我会在下篇文章啊详细讲解Self
-Attention的工作原理。</p>
+<p>关于这部分内容，我会在下篇文章详细讲解Self
+Attention的工作原理，以及它在Transformer中Encoder的应用。</p>
 <h1 id="结束语">结束语</h1>
 <p>在这篇文章中，我们已经了解了 Encoder-Decoder 和 Attention
 的概念，这些概念在自然语言处理中非常有用。
-不过，我们希望这些模型不仅仅可以用于处理自然语言，还可以用在更多的领域，比如我最终的目的是使用Transformer来预测时序数据，因此Transformer将会是我在下一篇文章的重点。且看它如何在
+不过，我们希望这些模型不仅仅可以用于处理自然语言，还可以用在更多的领域，比如我的最终目的是使用Transformer来预测时序数据，因此Transformer的技术原理将会是我在下一篇文章的重点。且看它如何在
 Encoder-decoder 和 Attention 的基础上开疆拓土，让我们拭目以待！</p>
 <h1 id="参考链接">参考链接</h1>
+<h2 id="参考网站">参考网站</h2>
 <ol type="1">
 <li><p>Tensorflow的官方教程：Neural machine translation with a
 Transformer and Keras:</p>
@@ -589,8 +637,27 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/yangyehuisw/article/d
 <li><p>深度学习中的注意力机制(2017版)</p>
 <p><a
 target="_blank" rel="noopener" href="https://blog.csdn.net/malefactor/article/details/78767781">https://blog.csdn.net/malefactor/article/details/78767781</a></p></li>
+<li><p>Transformer打开了通用人工智能的一扇门？</p>
+<p><a
+target="_blank" rel="noopener" href="https://maimai.cn/article/detail?fid=1736575591&amp;efid=G3Qsw_4kvsfAXWUIsSeeig">https://maimai.cn/article/detail?fid=1736575591&amp;efid=G3Qsw_4kvsfAXWUIsSeeig</a></p></li>
 </ol>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a><a class="post-meta__tags" href="/tags/transformer/">transformer</a></div><div class="post_share"><div class="social-share" data-image="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/20/CS231n-Assignment-1/"><img class="prev-cover" src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CS231n Assignment 1 逐行解析</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%88%9D%E6%8E%A2/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">强化学习初探</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）</div></div></a></div><div><a href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）</div></div></a></div><div><a href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）</div></div></a></div><div><a href="/2022/12/09/%E6%88%91%E7%9A%84%E7%A7%91%E7%A0%94%E7%BB%8F%E5%8E%86/" title="我的项目经历"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Experience/uav3(1).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-09</div><div class="title">我的项目经历</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">龚泽颖</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/serika-onoe" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zgong313@connect.hkust-gz.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">雪融化了，是春天！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#encoder-decoder%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">Encoder-Decoder框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8decoder%E5%BD%A2%E5%BC%8F%E5%8F%8A%E5%85%B6%E9%97%AE%E9%A2%98"><span class="toc-number">2.3.</span> <span class="toc-text">经典Decoder形式及其问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90"><span class="toc-number">2.4.</span> <span class="toc-text">问题的简单例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#attention%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">Attention机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-number">3.2.</span> <span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80"><span class="toc-number">3.2.1.</span> <span class="toc-text">问题一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C"><span class="toc-number">3.2.2.</span> <span class="toc-text">问题二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E8%AF%B4%E8%B5%B7"><span class="toc-number">3.3.1.</span> <span class="toc-text">从一个问题说起</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B"><span class="toc-number">3.4.</span> <span class="toc-text">计算过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B51"><span class="toc-number">3.4.1.</span> <span class="toc-text">阶段1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B52"><span class="toc-number">3.4.2.</span> <span class="toc-text">阶段2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B53"><span class="toc-number">3.4.3.</span> <span class="toc-text">阶段3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">3.5.</span> <span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9Bself-attention"><span class="toc-number">3.5.1.</span> <span class="toc-text">改进：Self Attention</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%AF%AD"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"/></a><div class="content"><a class="title" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）">Transformer 零基础解析教程，完整版代码最终挑战（4/4）</a><time datetime="2023-02-05T03:53:10.000Z" title="发表于 2023-02-05 11:53:10">2023-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"/></a><div class="content"><a class="title" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a><time datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"/></a><div class="content"><a class="title" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）</a><time datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/31/FEDformer%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="FEDformer论文阅读"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FEDformer论文阅读"/></a><div class="content"><a class="title" href="/2022/12/31/FEDformer%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="FEDformer论文阅读">FEDformer论文阅读</a><time datetime="2022-12-31T03:47:23.000Z" title="发表于 2022-12-31 11:47:23">2022-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析"><img src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS231n Assignment 1 逐行解析"/></a><div class="content"><a class="title" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析">CS231n Assignment 1 逐行解析</a><time datetime="2022-12-20T14:49:13.000Z" title="发表于 2022-12-20 22:49:13">2022-12-20</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 龚泽颖</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<h2 id="参考文献">参考文献</h2>
+<p><strong>[论文1]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1406.1078">Kyunghyun Cho, Bart van
+Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger
+Schwenk, Yoshua Bengio: “Learning Phrase Representations using RNN
+Encoder-Decoder for Statistical Machine Translation”, 2014;
+[http://arxiv.org/abs/1406.1078 arXiv:1406.1078].</a></p>
+<p><strong>[论文2]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Ilya Sutskever, Oriol Vinyals,
+Quoc V. Le: “Sequence to Sequence Learning with Neural Networks”, 2014;
+[http://arxiv.org/abs/1409.3215 arXiv:1409.3215].</a></p>
+<p><strong>[论文3]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Ashish Vaswani, Noam Shazeer,
+Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz
+Kaiser, Illia Polosukhin: “Attention Is All You Need”, 2017;
+[http://arxiv.org/abs/1706.03762 arXiv:1706.03762].</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/transformer/">transformer</a></div><div class="post_share"><div class="social-share" data-image="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/20/CS231n-Assignment-1/"><img class="prev-cover" src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CS231n Assignment 1 逐行解析</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/09/%E6%88%91%E7%9A%84%E7%A7%91%E7%A0%94%E7%BB%8F%E5%8E%86/"><img class="next-cover" src="https://github.com/serika-onoe/web-img/raw/main/Experience/uav3(1).png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">我的项目经历</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）</div></div></a></div><div><a href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）</div></div></a></div><div><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-31</div><div class="title">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）</div></div></a></div><div><a href="/2022/12/09/%E6%88%91%E7%9A%84%E7%A7%91%E7%A0%94%E7%BB%8F%E5%8E%86/" title="我的项目经历"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Experience/uav3(1).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-09</div><div class="title">我的项目经历</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">空之影</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/serika-onoe" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zgong313@connect.hkust-gz.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Transformer 解读系列共计四篇文章，均已大功告成，请放心享用！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Transformer教程系列介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#encoder-decoder%E6%A1%86%E6%9E%B6"><span class="toc-number">3.</span> <span class="toc-text">Encoder-Decoder框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8decoder%E5%BD%A2%E5%BC%8F%E5%8F%8A%E5%85%B6%E9%97%AE%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text">经典Decoder形式及其问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90"><span class="toc-number">3.4.</span> <span class="toc-text">问题的简单例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#attention%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">Attention机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">4.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-number">4.2.</span> <span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%E5%85%B3%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D"><span class="toc-number">4.2.1.</span> <span class="toc-text">问题一：关于注意力应该如何分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%E5%85%B3%E4%BA%8E%E5%85%B7%E4%BD%93%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A6%82%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">4.2.2.</span> <span class="toc-text">问题二：关于具体注意力概率的计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E8%B4%A8"><span class="toc-number">4.3.</span> <span class="toc-text">本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text">计算过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B51"><span class="toc-number">4.4.1.</span> <span class="toc-text">阶段1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B52"><span class="toc-number">4.4.2.</span> <span class="toc-text">阶段2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B53"><span class="toc-number">4.4.3.</span> <span class="toc-text">阶段3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">4.5.</span> <span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9Bself-attention"><span class="toc-number">4.5.1.</span> <span class="toc-text">改进：Self Attention</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结束语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E7%BD%91%E7%AB%99"><span class="toc-number">6.1.</span> <span class="toc-text">参考网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">6.2.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"/></a><div class="content"><a class="title" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）">Transformer 零基础解析教程，完整版代码最终挑战（4/4）</a><time datetime="2023-02-05T03:53:10.000Z" title="发表于 2023-02-05 11:53:10">2023-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"/></a><div class="content"><a class="title" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a><time datetime="2023-01-31T09:00:10.000Z" title="发表于 2023-01-31 17:00:10">2023-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"/></a><div class="content"><a class="title" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）</a><time datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析"><img src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS231n Assignment 1 逐行解析"/></a><div class="content"><a class="title" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析">CS231n Assignment 1 逐行解析</a><time datetime="2022-12-20T14:49:13.000Z" title="发表于 2022-12-20 22:49:13">2022-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"/></a><div class="content"><a class="title" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）</a><time datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 空之影</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
