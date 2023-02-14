@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4） | 空之影的技术博客</title><meta name="author" content="空之影"><meta name="copyright" content="空之影"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="导航 这篇文章是关于Transformer的原理详细解读。  本博客的 Transformer 系列文章共计四篇，导航如下：   Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4） Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）本篇 Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4） | 空之影的技术博客</title><meta name="author" content="空之影"><meta name="copyright" content="空之影"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="导航 这篇文章是关于Transformer的原理详细解读。  本博客的 Transformer 系列文章共计四篇，导航如下：   Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4） Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2&#x2F;4）本篇 Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）">
+<meta property="og:title" content="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2&#x2F;4）">
 <meta property="og:url" content="https://serika-onoe.github.io/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="空之影的技术博客">
-<meta property="og:description" content="导航 这篇文章是关于Transformer的原理详细解读。  本博客的 Transformer 系列文章共计四篇，导航如下：   Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4） Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2&#x2F;4）本篇 Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3">
+<meta property="og:description" content="导航 这篇文章是关于Transformer的原理详细解读。  本博客的 Transformer 系列文章共计四篇，导航如下：   Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4） Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2&#x2F;4）本篇 Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg">
 <meta property="article:published_time" content="2023-01-11T09:00:10.000Z">
-<meta property="article:modified_time" content="2023-02-05T15:56:39.773Z">
+<meta property="article:modified_time" content="2023-02-14T15:45:03.119Z">
 <meta property="article:author" content="空之影">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="transformer">
@@ -49,12 +49,12 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）',
+  title: 'Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-02-05 23:56:39'
+  postUpdate: '2023-02-14 23:45:03'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,7 +144,7 @@
     }
     detectApple()
     })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CodeByZach/pace/themes/green/pace-theme-flash.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="空之影的技术博客" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">空之影的技术博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-05T15:56:39.773Z" title="更新于 2023-02-05 23:56:39">2023-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0-%E6%95%99%E7%A8%8B/">笔记, 教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="导航">导航</h1>
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">空之影的技术博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/en/"><i class="fa-fw fas fa-language"></i><span> English</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-14T15:45:03.119Z" title="更新于 2023-02-14 23:45:03">2023-02-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0-%E6%95%99%E7%A8%8B/">笔记, 教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="导航">导航</h1>
 <p><strong>这篇文章是关于Transformer的原理详细解读。</strong></p>
 <blockquote>
 <p>本博客的 Transformer 系列文章共计四篇，导航如下：</p>
@@ -155,7 +155,7 @@ href="https://serika-onoe.github.io/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%
 零基础解析教程，从Encoder-Decoder架构说起（1/4）</a></p></li>
 <li><p><a
 href="https://serika-onoe.github.io/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/">Transformer
-零基础解析教程，剥洋葱般层层展开内在原理（2/4）<strong>本篇</strong></a></p></li>
+零基础解析教程，剥洋葱般层层剖析内在原理（2/4）<strong>本篇</strong></a></p></li>
 <li><p><a
 href="https://serika-onoe.github.io/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/">Transformer
 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a></p></li>
@@ -327,13 +327,8 @@ src="https://jinglescode.github.io/assets/img/posts/illustrated-guide-transforme
 更长的序列。然而，由于LSTM更加复杂，使得LSTM与RNN相比运行更慢。</p>
 <h3
 id="针对上下文向量长度固定的改进attention">针对上下文向量长度固定的改进：Attention</h3>
-<figure>
 <img
-src="https://jinglescode.github.io/assets/img/posts/illustrated-guide-transformer-06.jpg"
-alt="使用固定长度的向量来表示输入序列。" />
-<figcaption
-aria-hidden="true">使用固定长度的向量来表示输入序列。</figcaption>
-</figure>
+src="https://jinglescode.github.io/assets/img/posts/illustrated-guide-transformer-06.jpg" />
 <center>
 <code>图6: 长序列输入到原有模型的例子</code>
 </center>
@@ -362,7 +357,7 @@ src="https://jinglescode.github.io/assets/img/posts/illustrated-guide-transforme
 <p>答案是：<strong>Yes, attention is all you need!</strong></p>
 <p>哈哈，有点一语双关的感觉（说不定Google
 Brain团队当时起名的时候就是这么想的）。在2017年，我们得到了一个令人满意的答案，一款名为Transformer的“神器”横空出世，至今风头不减当年。它也是我们这篇文章要探讨的主题。</p>
-<h1 id="transformer简介">Transformer简介</h1>
+<h3 id="transformer诞生对标rnn">Transformer诞生，对标RNN</h3>
 <p><strong>[论文3]</strong>: <a
 target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Ashish Vaswani, Noam Shazeer,
 Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz
@@ -378,8 +373,7 @@ entirely.</p>
 Jones, L., Gomez, A.N., Kaiser, Ł., Polosukhin, I. (2017). </em><br>
 <em>Attention is all you need.</em></p>
 </blockquote>
-<h1 id="transformer对比rnn">Transformer对比RNN</h1>
-<p>Transformer中抛弃了传统的CNN和RNN，整个网络结构完全是由Attention机制组成，更准确地讲，<strong>Transformer由且仅由Self
+<p>Transformer在定义上就表明，它抛弃了传统的CNN和RNN，整个网络结构完全是由Attention机制组成。其实更准确地讲，<strong>Transformer由且仅由Self
 Attenion和Feed Forward Neural
 Network组成</strong>。采用Attention机制是因为考虑到RNN（或者LSTM，GRU等）的计算限制是顺序处理的，也就是说RNN相关算法只能从左向右依次计算或者从右向左依次计算，这种机制带来了两个问题：</p>
 <ol type="1">
@@ -392,14 +386,13 @@ class="math inline">\(t-1\)</span>时刻的计算结果，这样限制了模型�
 <li><p>不采用类似RNN的顺序结构，而是具有并行性，符合现有的GPU框架。</p></li>
 <li><p>使用了Attention机制，将序列中的任意两个位置之间的距离缩小为一个常量，采用了和LSTM不同的思路，从而允许处理不同长度的输入序列，并且摆脱了长期依赖的影响。</p></li>
 </ol>
-<p>这也就是为什么它在机器翻译任务种打败了以前基于RNN的Encoder-Decoder模型，并且在其他应用中也非常受欢迎的原因。</p>
+<p>这也就是为什么它在机器翻译任务中打败了以前基于RNN的Encoder-Decoder模型，并且在其他应用领域也非常受欢迎的原因。</p>
 <h1 id="transformer原理">Transformer原理</h1>
 <img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" width = "50%" />
 <center>
 <code>图9: Transformer模型的整体架构</code>
 </center>
-<p><br/><br/>
-上图是Transformer的整体架构图，结构上看起来和Encoder-Decoder模型很相似，左边是Encoder部分，右边是Decoder部分。为了方便理解，下面把Transformer分成四个部分进行详细说明:</p>
+<p>上图是Transformer的整体架构图，结构上看起来和Encoder-Decoder模型很相似，左边是Encoder部分，右边是Decoder部分。为了方便理解，下面把Transformer分成四个部分进行详细说明:</p>
 <img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer_4parts.jpg" width = "50%" />
 <center>
 <code>图10: Transformer模型可分为4个组成部分</code>
@@ -423,7 +416,7 @@ Attention，第三块是全连接层。也用了跳跃连接和Normalization。<
 以英-中翻译为例：假设我们输入<code>"Why do we work?"</code>，输出可以是<code>"为什么我们要工作？"</code>。那么Transformer的工作步骤是：</p>
 <ol type="1">
 <li>输入自然语言序列到编码器: Why do we work?</li>
-<li>编码器输出的隐藏层, 再输入到解码器;</li>
+<li>编码器先输出隐藏层, 再输入到解码器;</li>
 <li>输入<span
 class="math inline">\(&lt;start&gt;\)</span>(起始)符号到解码器;</li>
 <li>得到第一个字"为";</li>
@@ -440,12 +433,12 @@ class="math inline">\(&lt;end&gt;\)</span>(终止符),
 <center>
 <code>图12: Transformer模型的输入部分</code>
 </center>
-<p><br/><br/> 我们同样以上篇采用过的英-中翻译例子，我们输入"Tom chase
+<p>我们同样以上篇采用过的英-中翻译例子，我们输入"Tom chase
 Jerry"，期待输出的翻译结果为"汤姆追逐杰瑞"。</p>
-<p>Transformer的Decoder的输入与Encoder的输入处理方法步骤是一样的，一个接受source数据，一个接受target数据，对应例子里面就是：Encoder接受英文"Tom
-chase
-Jerry"，Decoder接受中文"汤姆追逐杰瑞"。当然对Decoder来说，只是在有target数据时（也就是在进行有监督训练时）才会接受Outputs
-Embedding，进行预测时则不会接收。那么下面，以Encoder为例，描述输入过程和细节分析：</p>
+<p>Transformer的Decoder的输入处理方法与Encoder的输入处理方法步骤是相似的，但不完全一样。Encoder接受源语言数据，并通过Self-Attention和Feed-Forward网络进行编码；Decoder接受目标语言数据，并在Self-Attention、Encoder-Decoder
+Attention和Feed-Forward网络的基础上进行解码。在有监督训练时，Decoder的输入包括Target
+Embedding和一个Masked Multi-Head
+Attention，用于生成目标语言的下一个词。输出Embedding在预测时用于生成下一个目标词。那么下面，以Encoder为例，描述输入过程和细节分析：</p>
 <ol type="1">
 <li><p>首先，向Transformer输入文本 <code>"Tom chase Jerry"</code>
 。</p></li>
@@ -616,24 +609,23 @@ class="math inline">\(i=0, 1, 2, \dots, 255\)</span>。</p></li>
 <code>图15: Transformer模型的编码器部分</code>
 </center>
 <p><br/><br/>
-在论文中，有6层编码器，即<code>“Nx”的N=6</code>。编码器的每一层(Encoderlayer)是由4个sub-layer（子层）组成的：</p>
-<ul>
-<li>第一个子层是多头注意力机制 (multi-head self-attention
-mechanism)，它通过计算输入序列中各个位置的关系，生成关于该位置的输入的新的表示。</li>
-<li>第二个子层是残差连接 (residual
-connection)，它将第一个子层的输出与原始输入相加。</li>
-<li>第三个子层是归一化
-(normalization)，它对第二个子层的输出进行标准化，以维护其统计特性。</li>
-<li>第四个子层是全连接前馈层（feed-forward
-layer），它通过一个多层神经网络对第三个子层的输出进行非线性变换，从而生成新的表示。</li>
-</ul>
+在论文中，有6层编码器，即<code>“Nx”的N=6</code>。Transformer的编码器的每一层(Encoder
+layer)是由4个sub-layer（子层）组成的：</p>
+<p>第一个子层是多头注意力机制 (multi-head self-attention
+mechanism)，它通过计算输入序列中各个位置的关系，生成关于该位置的输入的新的表示。
+第二个子层是残差连接 (residual
+connection)，它将第一个子层的输出与原始输入相加，并进行归一化以维护其统计特性。
+第三个子层是全连接前馈层（feed-forward
+layer），它通过一个多层神经网络对第二个子层的输出进行非线性变换，从而生成新的表示。
+第四个子层是残差连接 (residual
+connection)，它将第三个子层的输出与原始输入相加，并进行归一化以维护其统计特性。</p>
 <p>这段代码实现了一个transformer编码器中的一个编码层EncoderLayer。这个编码层由两部分组成，分别是自注意力机制self-attn和前馈网络feed_forward。在初始化时，通过传入size、self_attn、feed_forward和dropout参数来初始化编码层。</p>
 <p>在前向传播过程中，首先使用自注意力机制对输入x进行处理，然后将处理后的结果经过前馈网络进一步处理，最后返回处理结果。</p>
-<p>具体来说，使用sublayer<a
-href="x,%20lambda%20x:%20self.self_attn(x,%20x,%20x,%20mask)">0</a>
-调用SublayerConnection类对输入进行处理，进行自注意力机制。
-之后使用sublayer<a
-href="x,%20self.feed_forward">1</a>将结果经过前馈网络进一步处理。</p>
+<p>具体来说，使用 <span class="math inline">\(sublayer[0](x, lambda x:
+self.self_attn(x, x, x, mask))\)</span>
+调用SublayerConnection类对输入进行处理，进行自注意力机制。 之后使用
+<span class="math inline">\(sublayer[1](x, self.feed_forward)\)</span>
+将结果经过前馈网络进一步处理。</p>
 <h3 id="multi-head-attention">Multi-Head Attention</h3>
 <p><strong>Multi-Head Attention是Self
 Attention机制的进一步细化，因此先从Self Attention讲起：</strong></p>
@@ -678,7 +670,7 @@ class="math inline">\(W^V\)</span>权重矩阵产生<span
 class="math inline">\(v_1\)</span>，即与该词关联的Value向量。</li>
 </ol>
 <p>请注意，qkv向量的维度小于embedding向量。它们的维数是
-64，而嵌入和编码器输入/输出向量的维数是
+64，而embedding和编码器输入/输出向量的维数是
 512。它们不必更小，这是一种使multi-head
 attention（大部分）计算保持不变的架构选择。</p>
 <p><strong>单词级别-第二步</strong></p>
@@ -696,15 +688,33 @@ src="https://jalammar.github.io/images/t/transformer_self_attention_score.png" /
 <p>上式为什么要除以<span
 class="math inline">\(\sqrt{d_k}\)</span>呢？</p>
 </blockquote>
-<p>因为为了防止维数过高时<span
-class="math inline">\(QK^T\)</span>的值过大导致softmax函数反向传播时发生梯度消失。</p>
+<p>好问题！如果不进行除以<span
+class="math inline">\(\sqrt{d_k}\)</span>的操作，那么<span
+class="math inline">\(QK^T\)</span>的值将取决于<span
+class="math inline">\(d_k\)</span>的大小。当<span
+class="math inline">\(d_k\)</span>较大时，<span
+class="math inline">\(QK^T\)</span>中的元素将变得相对较大，可能会导致softmax函数的输出非常小，导致梯度消失的问题。当<span
+class="math inline">\(d_k\)</span>较小时，<span
+class="math inline">\(QK^T\)</span>中的元素将变得相对较小，可能会导致softmax函数的输出非常大，导致梯度爆炸的问题。为了避免这种情况，Transformer中对<span
+class="math inline">\(QK^T\)</span>的每个元素都除以<span
+class="math inline">\(\sqrt{d_k}\)</span>，以使得在不同<span
+class="math inline">\(d_k\)</span>下，<span
+class="math inline">\(QK^T\)</span>的元素大小分布更加平稳，从而更稳定地进行softmax函数的计算和反向传播。因此，除以<span
+class="math inline">\(\sqrt{d_k}\)</span>是一种既简单又有效的方法来缩放注意力分数，这也是为什么Transformer中会采用这种方式。
+<em>--By ChatGPT</em></p>
 <blockquote>
 <p>为什么是<span class="math inline">\(\sqrt{d_k}\)</span>而不是<span
 class="math inline">\(d_k\)</span>呢？</p>
 </blockquote>
-<p>这就是个经验值，从理论上来说，就是还需要让<span
-class="math inline">\(QK^T\)</span>的值适度增加，但不能过度增加，如果是<span
-class="math inline">\(d_k\)</span>的话，可能就不增加了。</p>
+<p>在Transformer中，除以<span
+class="math inline">\(\sqrt{d_k}\)</span>是为了缩小内积的值的范围，避免softmax函数的梯度消失和梯度爆炸问题。而为什么不使用<span
+class="math inline">\(d_k\)</span>作为缩放系数呢？这是因为<span
+class="math inline">\(d_k\)</span>的值通常会非常大（比如说，如果使用了512维的向量，<span
+class="math inline">\(d_k\)</span>就为512），这样就会导致内积的值也变得非常大，从而使得softmax函数的梯度非常小，导致梯度消失的问题。此外，除以<span
+class="math inline">\(\sqrt{d_k}\)</span>可以使得每个维度对注意力分数的影响相等，这是因为所有维度上的内积被相同的因子<span
+class="math inline">\(\sqrt{d_k}\)</span>缩放。这种均衡性有助于确保注意力机制可以平衡地关注每个维度上的信息。因此，使用<span
+class="math inline">\(\sqrt{d_k}\)</span>作为缩放系数是一种更好的选择。<em>--By
+ChatGPT</em></p>
 <p><strong>单词级别-第四步</strong></p>
 <p>然后通过 softmax 操作传递结果。softmax
 对分数进行归一化处理，使它们都为正且加起来为 1。</p>
@@ -720,7 +730,7 @@ src="https://jalammar.github.io/images/t/self-attention_softmax.png" /><br />
 <p>将每个Value向量乘以 softmax
 分数（准备将它们相加）。这里的直觉是保持我们想要关注的单词的值不变，并淹没不相关的单词（例如，通过将它们乘以像
 0.001
-这样的小数字）。然后是对加权值向量求和。这会在该位置产生自注意层的输出。</p>
+这样的小数字）。然后是对加权值向量求和，这会在该位置产生自注意层的输出。</p>
 <img
 src="https://jalammar.github.io/images/t/self-attention-output.png" /><br />
 
@@ -758,7 +768,7 @@ Attention的机制，进一步细化了自注意力层。主要体现在两个�
 <ol type="1">
 <li><p>它扩展了模型关注不同位置的能力。比如要翻译像“The animal didn't
 cross the street because it was too
-tired”这样的句子，知道“it”指的是哪个词会很有用。</p></li>
+tired”这样的句子，知道“it”和哪几个词有关会很有用。</p></li>
 <li><p>它为注意力层提供了多个representation subspaces
 (表示子空间)。正如我们接下来将看到的，对于Multi-head
 Attention，我们有多组QKV权重矩阵，其中的每一个都是随机初始化的。训练之后，每个集合用于将输入（初始输入或来自较低编码器/解码器的向量）投影到不同的表示子空间中。</p></li>
@@ -785,20 +795,23 @@ src="https://jalammar.github.io/images/t/transformer_attention_heads_weight_matr
 <center>
 <code>图25: 将多个Z矩阵通过矩阵乘法合并成总的Z矩阵</code>
 </center>
-<p><br/><br/> <img
-src="https://jalammar.github.io/images/t/transformer_multi-headed_self-attention-recap.png" /></p>
-<p>现在我们已经谈到了attention
+<br/><br/> <img
+src="https://jalammar.github.io/images/t/transformer_multi-headed_self-attention-recap.png" />
+<center>
+<code>图26: 将每个头的输出拼接在一起并通过一个Linear层，映射成类似单头的输出</code>
+</center>
+<p><br/><br/> 现在我们已经谈到了attention
 head，让我们重新审视我们之前的例子，看看当我们在示例句子中对单词“it”进行编码时，不同的attention
 head集中在什么地方：</p>
 <img
 src="https://jalammar.github.io/images/t/transformer_self-attention_visualization_2.png" /><br />
 
 <center>
-<code>图26: 不同attention head对it的注意力权重不同</code>
+<code>图27: 不同attention head对it的注意力权重不同</code>
 </center>
 <p><br/><br/> 当我们对“it”这个词进行编码时，一个attention head最关注“the
-animal”，而另一个attention head则关注“tired”。我认为这说明不同attention
-head很可能是从不同角度来理解it和其他单词的关系，比如it的指代的对象是“the
+animal”，而另一个attention head则关注“tired”。这说明不同attention
+head很可能从不同角度来理解it和其他单词的关系，比如it的指代的对象是“the
 animal”，而这个对象所处的状态是“tired”。因为Attention是注意力的意思而不是表示相等的意思，那么从不同角度看待同一个事物，得到不同的答案自然也是没问题的。</p>
 <h3 id="add-normalize">Add &amp; Normalize</h3>
 <p>可以注意到编码器/解码器的每个子层（比如self attention,
@@ -807,17 +820,20 @@ ffnn）之后都带有一个 <strong>Add &amp; Normalize</strong>。</p>
 src="https://jalammar.github.io/images/t/transformer_resideual_layer_norm.png" /><br />
 
 <center>
-<code>图27: 每个编码器中都有2个Add &amp; Normalize子层</code>
+<code>图28: 每个编码器中都有2个Add &amp; Normalize子层</code>
 </center>
 <p><br/><br/></p>
-<p>我之前没有听说过残差连接，因此看着这张图好久也没看出residual这个词体现在哪里，问了“Chat老师”才明白，Add表示残差连接，Norm表示LayerNorm，残差连接来源于<strong>[论文4]</strong>:
-<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.03385">Kaiming He, Xiangyu Zhang,
+<p>我之前没有听说过残差连接，因此看着这张图好久也没看出residual这个词体现在哪里，问了“Chat老师”才明白：</p>
+<ul>
+<li><p>Add表示残差连接，残差连接来源于<strong>[论文4]</strong>: <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.03385">Kaiming He, Xiangyu Zhang,
 Shaoqing Ren, Jian Sun: “Deep Residual Learning for Image Recognition”,
-2015; [http://arxiv.org/abs/1512.03385
-arXiv:1512.03385].</a>，LayerNorm来源于<strong>[论文5]</strong>: <a
+2015; [http://arxiv.org/abs/1512.03385 arXiv:1512.03385].</a></p></li>
+<li><p>Norm表示LayerNorm，LayerNorm来源于<strong>[论文5]</strong>: <a
 target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.06450">Jimmy Lei Ba, Jamie Ryan Kiros,
 Geoffrey E. Hinton: “Layer Normalization”, 2016;
-[http://arxiv.org/abs/1607.06450 arXiv:1607.06450].</a>。</p>
+[http://arxiv.org/abs/1607.06450 arXiv:1607.06450].</a>。</p></li>
+</ul>
 <p>Encoder端和Decoder端每个子模块实际的输出为：<span
 class="math inline">\(LayerNorm(x+Sublayer(x))\)</span>，其中<span
 class="math inline">\({Sublayer}(x)\)</span>为子模块的输出。这样做有助于模型更好地捕捉长期依赖关系。</p>
@@ -826,62 +842,86 @@ class="math inline">\({Sublayer}(x)\)</span>为子模块的输出。这样做有
 <blockquote>
 <p>什么是残差连接</p>
 </blockquote>
-<p>残差连接（residual
-connections）是一种网络设计方法，就是在每一层的输入和输出之间添加一个残差连接，并对结果进行标准化。（其实也就是Add
-&amp;
-Normolize）这种方法能够有效地缓解深度网络中的梯度消失问题，帮助模型更好地捕捉长期依赖关系。</p>
-<p>例如在Transformer中，设计一个多头注意力机制的层，输入为x，输出为y，残差连接就是
-y=norm(x+multi-head-attention(x))</p>
-<p>这样做的好处就是，当网络层数较深时，残差连接能够有效减少梯度消失问题，简化网络训练过程，使网络能够更好地捕捉长期依赖关系。</p>
+<p>残差连接是一种网络设计方法，它的作用是在每一层的输入和输出之间添加一个跨层连接（shortcut
+connection），并通过标准化来处理连接处的数据。在Transformer中，每个Encoder层都由一个残差连接和两个正规化步骤组成。</p>
+<p>残差连接的公式是 y=LayerNorm(x+Sublayer(x))</p>
+<ul>
+<li>Sublayer(x)可以是任意的层，比如Multi-Head
+Attention或Feed-Forward层。</li>
+<li>LayerNorm是对每个样本的所有隐藏单元进行归一化，以防止过拟合和提高模型的鲁棒性。</li>
+<li>其实也就是Add &amp; Normolize</li>
+</ul>
+<p>残差连接的好处是能够有效地减轻梯度消失问题，简化网络训练过程，并帮助网络更好地捕捉长期依赖关系。</p>
 <p><strong>问题二</strong></p>
 <blockquote>
-<p>Add操作做了什么</p>
+<p>为什么引入残差连接</p>
 </blockquote>
-<p>Add，就是在Z的基础上加了一个残差块X。</p>
-<p><img
+<img
 src="https://img-blog.csdnimg.cn/94d2b8dbc1ea432c9ca85f62e29cb454.png#pic_center" />
-上图就是构造的一个残差块。</p>
+<center>
+<code>图29:  Residual learning：a building block</code>
+</center>
 <ul>
 <li>X是这一层残差块的输入值</li>
 <li>F(X)是经过第一层线性变化并激活后的输出，也称为残差</li>
+<li>在第二层输出值激活前加入X，这条路径称作跨层连接（shortcut
+connection）。</li>
 </ul>
-<p>该图表示在残差网络中，第二层进行线性变化之后、激活之前，F(X)加入了这一层输入值X，然后再进行激活后输出。在第二层输出值激活前加入X，这条路径称作shortcut连接。</p>
-<p>加入残差块X的目的是为了防止在深度神经网络训练中发生退化问题，退化的意思就是深度神经网络通过增加网络的层数，Loss逐渐减小，然后趋于稳定达到饱和，然后再继续增加网络层数，Loss反而增大。</p>
+<p>《Deep Residual Learning for Image Recognition》论文中的Figure
+2展示了残差学习的建筑块。这个建筑块由两个卷积层组成，每个卷积层后面跟着一个ReLU激活函数。在这个建筑块的最后，有一条跨越了两个卷积层的连接，它绕过了这两个卷积层，直接将输入信息传递到输出端。这个跨层连接被称为“残差连接”。</p>
+<p>引入残差连接的目的就是为了防止<strong>在深度神经网络训练中发生退化问题</strong>，使得更深的网络能够更好地学习特征表达。</p>
 <p><strong>问题三</strong></p>
 <blockquote>
-<p>为什么深度神经网络会发生退化？</p>
+<p>什么是退化，为什么深度神经网络会发生退化？</p>
 </blockquote>
-<p>举个例子：假如某个神经网络的最优网络层数是18层，但是我们在设计的时候并不知道到底多少层是最优解，本着层数越深越好的理念，我们设计了32层，那么32层神经网络中有14层其实是多余地，我们要想达到18层神经网络的最优效果，必须保证这多出来的14层网络必须进行恒等映射，恒等映射的意思就是说，输入什么，输出就是什么，可以理解成F(x)=x这样的函数，因为只有进行了这样的恒等映射咱们才能保证这多出来的14层神经网络不会影响我们最优的效果。<br />
-但现实是神经网络的参数都是训练出来地，要想保证训练出来地参数能够很精确的完成F(x)=x的恒等映射其实是很困难地。多余的层数较少还好，对效果不会有很大影响，但多余的层数一多，可能结果就不是很理想了。这个时候大神们就提出了ResNet
-残差神经网络来解决神经网络退化的问题。</p>
+<p>退化问题通常指的是：当神经网络层数增加时，网络的性能开始变差，表现为训练误差的增加和泛化误差的增加。一种可能的原因是，在网络较深的时候，由于神经网络的非线性层的存在，梯度传播变得困难，导致网络的训练变得困难。</p>
+<p>而残差连接通过引入跨层连接，可以使梯度在网络中更容易地流动，从而减轻梯度消失的问题，进一步提高了网络的性能。</p>
+<p>举个例子：假如某个神经网络的最优网络层数是18层，但是我们在设计的时候并不知道到底多少层是最优解，本着层数越深越好的理念，我们设计了32层，那么32层神经网络中有14层其实是多余的，我们要想达到18层神经网络的最优效果，必须保证这多出来的14层网络必须进行恒等映射，恒等映射的意思就是说，输入什么，输出就是什么，可以理解成F(x)=x这样的函数，因为只有进行了这样的恒等映射咱们才能保证这多出来的14层神经网络不会影响我们最优的效果。</p>
+<p>实际上，在训练过程中，网络的参数并不是直接训练得到的。相反，网络是通过反向传播算法来更新网络的参数，因此参数的更新是从后向前进行的，要想保证训练参数能够很精确的完成F(x)=x的恒等映射其实是很困难的。这个时候大神们就提出了ResNet（残差神经网络）来解决神经网络退化的问题。</p>
 <p><strong>问题四</strong></p>
 <blockquote>
 <p>为什么添加了残差块能防止神经网络退化问题呢？</p>
 </blockquote>
-<p>咱们再来看看添加了残差块后，咱们之前说的要完成恒等映射的函数变成什么样子了。是不是就变成h(X)=F(X)+X，我们要让h(X)=X，那么是不是相当于只需要让F(X)=0就可以了，这里就巧妙了！神经网络通过训练变成0是比变成X容易很多地，因为大家都知道咱们一般初始化神经网络的参数的时候就是设置的[0,1]之间的随机数嘛。所以经过网络变换后很容易接近于0。举个例子：</p>
+<p>咱们再来看看添加了残差块后，咱们之前说的要完成恒等映射的函数变成什么样子了。是不是就变成h(X)=F(X)+X，我们要让h(X)=X，那么是不是相当于只需要让F(X)=0就可以了，这里就巧妙了！神经网络通过训练变成0是比变成X容易很多的，因为大家都知道，咱们一般初始化神经网络的参数的时候就是设置的[0,1]之间的随机数嘛。所以经过网络变换后很容易接近于0。举个例子：</p>
 <p><img
 src="https://img-blog.csdnimg.cn/20200326001443472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RpbmsxOTk1,size_16,color_FFFFFF,t_70" /></p>
 <p>假设该网络只经过线性变换，没有bias也没有激活函数。我们发现因为随机初始化权重一般偏向于0，那么经过该网络的输出值为[0.6
 0.6]，很明显会更接近与[0 0]，而不是[2
-1]，相比与学习h(x)=x，模型要更快到学习F(x)=0。<br />
-并且ReLU能够将负数激活为0，过滤了负数的线性变化，也能够更快的使得F(x)=0。这样当网络自己决定哪些网络层为冗余层时，使用ResNet的网络很大程度上解决了学习恒等映射的问题，用学习残差F(x)=0更新该冗余层的参数来代替学习h(x)=x更新冗余层的参数。</p>
-<p>这样当网络自行决定了哪些层为冗余层后，通过学习残差F(x)=0来让该层网络恒等映射上一层的输入，使得有了这些冗余层的网络效果与没有这些冗余层的网络效果相同，这样很大程度上解决了网络的退化问题。</p>
-<p>到这里，关于Add中为什么需要加上一个X，要进行残差网络中的shortcut你清楚了吗？Transformer中加上的X也就是Multi-Head
-Attention的输入，X矩阵。</p>
+1]，相比与学习h(x)=x，模型要更快到学习F(x)=0。</p>
+<p>并且ReLU能够将负数激活为0，过滤了负数的线性变化，也能够更快的使得F(x)=0。用学习残差F(x)=0更新该冗余层的参数来代替学习h(x)=x更新冗余层的参数。通过学习残差F(x)=0来让该层网络恒等映射上一层的输入，使得有了这些冗余层的网络效果与没有多余层的浅层网络相同。这样很大程度上解决了网络的退化问题。</p>
 <p><strong>问题五</strong></p>
 <blockquote>
-<p>为什么要进行Normalize呢？<br />
-在神经网络进行训练之前，都需要对于输入数据进行Normalize归一化，目的有二：1，能够加快训练的速度。2.提高训练的稳定性。</p>
+<p>为什么要进行Normalize呢？</p>
 </blockquote>
+<p>在神经网络进行训练之前，都需要对于输入数据进行Normalize归一化，目的有二：</p>
+<ol type="1">
+<li><p>能够加快训练的速度。归一化能够加快训练速度的原因是可以使得数据在网络中传递时，每一层的输出值分布更加均匀，避免了在激活函数饱和区域的情况下，网络梯度消失或爆炸，从而保证了训练的速度和效果。</p></li>
+<li><p>提高训练的稳定性。归一化能够提高训练的稳定性的原因是使得数据在网络中传递时，每一层的输出值都保持在一个相对小的范围内，避免了出现数据的偏移和方差过大的情况，从而减小了模型对于数据的敏感度，使得模型更加稳定。</p></li>
+</ol>
+<p>在Transformer中，归一化层通常在每个多头自注意力和前馈网络之间进行，这些归一化层被称为"Layer
+Normalization"。它们在一个batch内的每个样本中对每个特征维度进行独立归一化，并且使用样本的均值和方差来标准化每个特征。</p>
 <p><strong>问题六</strong></p>
 <blockquote>
 <p>为什么使用Layer Normalization（LN）而不使用Batch
 Normalization（BN）呢？</p>
 </blockquote>
-<p><img
+<p>先看图，LN是在同一个样本中不同神经元之间进行归一化，而BN是在同一个batch中不同样本之间的同一位置的神经元之间进行归一化。</p>
+<img
 src="https://img-blog.csdnimg.cn/20200326202939489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RpbmsxOTk1,size_16,color_FFFFFF,t_70" /><br />
-先看图，LN是在同一个样本中不同神经元之间进行归一化，而BN是在同一个batch中不同样本之间的同一位置的神经元之间进行归一化。<br />
-BN是对于相同的维度进行归一化，但是咱们NLP中输入的都是词向量，一个300维的词向量，单独去分析它的每一维是没有意义地，在每一维上进行归一化也是适合地，因此这里选用的是LayerNorm。</p>
+
+<center>
+<code>图30: Layer Normalization和Batch Normalization可视化</code>
+</center>
+<p>可以看出，相比于图像领域，NLP任务中的输入是文本数据，一般使用词向量表示，每个词向量是一个高维稠密向量。在NLP任务中，同一个batch中的不同样本可能具有相似的词向量，但每个样本的长度（即词向量的数量）不同。因此，在NLP任务中，每个词向量的不同维度可能具有不同的意义，将每个维度视为不同的特征，并对不同的特征进行归一化处理更加合理。因此，Layer
+Normalization更适合NLP任务中的使用。而Batch
+Normalization更适用于图像领域的任务，其中输入是具有相同空间维度的图像。</p>
+<p>因此，总结原因如下：</p>
+<ol type="1">
+<li><p>LN更适用于序列数据：在NLP任务中，输入通常是一系列标记的序列，例如单词或字符。这种序列数据通常具有可变的长度和不同的分布。与固定大小的图像批次相比，序列的不同位置可能具有截然不同的统计属性，因此使用BN将导致不同位置的特征之间出现耦合。相比之下，LN可以更好地适应序列数据的变化。</p></li>
+<li><p>LN避免了对小批次大小的依赖：在BN中，对于每个小批次，特征的均值和方差是在该小批次上计算的。对于小批次，可能会出现均值和方差计算上的不准确性，从而导致性能下降。相比之下，LN不涉及小批次的计算，而是仅使用样本的特征，这使得它对小批次大小的依赖更小。</p></li>
+<li><p>LN更适用于深度网络：随着神经网络的加深，BN计算的均值和方差将越来越不可靠，这会导致性能下降。而LN则不会受到这个问题的影响，因为它在每个特征上进行归一化，而不是在整个批次上计算。</p></li>
+<li><p>LN可以更好地适应动态计算图：在深度学习中，一些计算图是动态的，其中图的结构在运行时可以更改。BN的计算依赖于图的结构，因此在这些情况下可能会遇到困难。相比之下，LN只依赖于每个特征的值，因此在动态计算图的环境下更容易使用。</p></li>
+</ol>
 因此，我们可以可视化Add &amp; Normalize操作，如下图所示： <img
 src="https://jalammar.github.io/images/t/transformer_resideual_layer_norm_2.png" /><br />
 
@@ -1197,8 +1237,8 @@ Transfer and Beyond”, 2018; [http://arxiv.org/abs/1812.10464
 arXiv:1812.10464]. DOI: [https://dx.doi.org/10.1162/tacl_a_00288
 10.1162/tacl_a_00288].</a></p></li>
 </ul>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/transformer/">transformer</a></div><div class="post_share"><div class="social-share" data-image="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/"><img class="prev-cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/20/CS231n-Assignment-1/"><img class="next-cover" src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CS231n Assignment 1 逐行解析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-14</div><div class="title">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）</div></div></a></div><div><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-31</div><div class="title">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）</div></div></a></div><div><a href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）</div></div></a></div><div><a href="/2022/12/09/%E6%88%91%E7%9A%84%E7%A7%91%E7%A0%94%E7%BB%8F%E5%8E%86/" title="我的项目经历"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Experience/uav3(1).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-09</div><div class="title">我的项目经历</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">空之影</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/serika-onoe" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zgong313@connect.hkust-gz.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Transformer 解读系列共计四篇文章，均已大功告成，请放心享用！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA"><span class="toc-number">1.</span> <span class="toc-text">导航</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E4%B9%8B%E5%89%8D%E7%9A%84%E7%BF%BB%E8%AF%91%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Transformer之前的翻译模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E6%9C%89%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-number">2.1.</span> <span class="toc-text">原有模型的缺陷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-number">2.1.1.</span> <span class="toc-text">什么是梯度消失和梯度爆炸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rnn%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E7%88%86%E7%82%B8%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.2.</span> <span class="toc-text">RNN梯度消失和爆炸的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E7%88%86%E7%82%B8%E7%9A%84%E6%94%B9%E8%BF%9Blstm"><span class="toc-number">2.1.3.</span> <span class="toc-text">针对梯度消失&#x2F;爆炸的改进：LSTM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F%E9%95%BF%E5%BA%A6%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%94%B9%E8%BF%9Battention"><span class="toc-number">2.1.4.</span> <span class="toc-text">针对上下文向量长度固定的改进：Attention</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">Transformer简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E5%AF%B9%E6%AF%94rnn"><span class="toc-number">4.</span> <span class="toc-text">Transformer对比RNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E5%8E%9F%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">Transformer原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-number">5.1.</span> <span class="toc-text">Input</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E8%AF%8Dtokenization"><span class="toc-number">5.1.1.</span> <span class="toc-text">分词(Tokenization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5embedding"><span class="toc-number">5.1.2.</span> <span class="toc-text">嵌入(Embedding)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81positional-encoding"><span class="toc-number">5.1.3.</span> <span class="toc-text">位置编码(Positional Encoding)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#encoder"><span class="toc-number">5.2.</span> <span class="toc-text">Encoder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-head-attention"><span class="toc-number">5.2.1.</span> <span class="toc-text">Multi-Head Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8Eself-attention%E8%AE%B2%E8%B5%B7"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">从Self Attention讲起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#multi-head-attention%E5%8E%9F%E7%90%86"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">Multi-head Attention原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add-normalize"><span class="toc-number">5.2.2.</span> <span class="toc-text">Add &amp; Normalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#feed-forward"><span class="toc-number">5.2.3.</span> <span class="toc-text">Feed Forward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#skip-connection%E5%9B%BE%E4%B8%AD%E7%9A%84%E8%99%9A%E7%BA%BF%E8%BE%93%E5%85%A5"><span class="toc-number">5.2.4.</span> <span class="toc-text">Skip
-Connection——图中的虚线输入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#decoder"><span class="toc-number">5.3.</span> <span class="toc-text">Decoder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#masked-multi-head-attention"><span class="toc-number">5.3.1.</span> <span class="toc-text">Masked Multi-Head-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-number">5.4.</span> <span class="toc-text">Output</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E8%AE%AD%E7%BB%83tricks"><span class="toc-number">6.</span> <span class="toc-text">Transformer训练Tricks</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E7%89%B9%E7%82%B9"><span class="toc-number">7.</span> <span class="toc-text">Transformer特点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">7.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">7.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88"><span class="toc-number">8.</span> <span class="toc-text">Transformer面试题及答案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">9.</span> <span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">9.1.</span> <span class="toc-text">整体代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E7%BD%91%E7%AB%99"><span class="toc-number">9.2.</span> <span class="toc-text">参考网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">9.3.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"/></a><div class="content"><a class="title" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）">Transformer 零基础解析教程，完整版代码最终挑战（4/4）</a><time datetime="2023-02-05T03:53:10.000Z" title="发表于 2023-02-05 11:53:10">2023-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"/></a><div class="content"><a class="title" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a><time datetime="2023-01-31T09:00:10.000Z" title="发表于 2023-01-31 17:00:10">2023-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）"/></a><div class="content"><a class="title" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）">Transformer 零基础解析教程，剥洋葱般层层展开内在原理（2/4）</a><time datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析"><img src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS231n Assignment 1 逐行解析"/></a><div class="content"><a class="title" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析">CS231n Assignment 1 逐行解析</a><time datetime="2022-12-20T14:49:13.000Z" title="发表于 2022-12-20 22:49:13">2022-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"/></a><div class="content"><a class="title" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）</a><time datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 空之影</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/transformer/">transformer</a></div><div class="post_share"><div class="social-share" data-image="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/"><img class="prev-cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/20/CS231n-Assignment-1/"><img class="next-cover" src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CS231n Assignment 1 逐行解析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-14</div><div class="title">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）</div></div></a></div><div><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-31</div><div class="title">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）</div></div></a></div><div><a href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）</div></div></a></div><div><a href="/2022/12/09/%E6%88%91%E7%9A%84%E7%A7%91%E7%A0%94%E7%BB%8F%E5%8E%86/" title="我的项目经历"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Experience/uav3(1).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-09</div><div class="title">我的项目经历</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">空之影</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/serika-onoe" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zgong313@connect.hkust-gz.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Transformer 解读系列共计四篇文章，均已大功告成，请放心享用！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA"><span class="toc-number">1.</span> <span class="toc-text">导航</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E4%B9%8B%E5%89%8D%E7%9A%84%E7%BF%BB%E8%AF%91%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Transformer之前的翻译模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E6%9C%89%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-number">2.1.</span> <span class="toc-text">原有模型的缺陷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-number">2.1.1.</span> <span class="toc-text">什么是梯度消失和梯度爆炸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rnn%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E7%88%86%E7%82%B8%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.2.</span> <span class="toc-text">RNN梯度消失和爆炸的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E7%88%86%E7%82%B8%E7%9A%84%E6%94%B9%E8%BF%9Blstm"><span class="toc-number">2.1.3.</span> <span class="toc-text">针对梯度消失&#x2F;爆炸的改进：LSTM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F%E9%95%BF%E5%BA%A6%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%94%B9%E8%BF%9Battention"><span class="toc-number">2.1.4.</span> <span class="toc-text">针对上下文向量长度固定的改进：Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transformer%E8%AF%9E%E7%94%9F%E5%AF%B9%E6%A0%87rnn"><span class="toc-number">2.1.5.</span> <span class="toc-text">Transformer诞生，对标RNN</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">Transformer原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-number">3.1.</span> <span class="toc-text">Input</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E8%AF%8Dtokenization"><span class="toc-number">3.1.1.</span> <span class="toc-text">分词(Tokenization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5embedding"><span class="toc-number">3.1.2.</span> <span class="toc-text">嵌入(Embedding)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81positional-encoding"><span class="toc-number">3.1.3.</span> <span class="toc-text">位置编码(Positional Encoding)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#encoder"><span class="toc-number">3.2.</span> <span class="toc-text">Encoder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-head-attention"><span class="toc-number">3.2.1.</span> <span class="toc-text">Multi-Head Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8Eself-attention%E8%AE%B2%E8%B5%B7"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">从Self Attention讲起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#multi-head-attention%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">Multi-head Attention原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add-normalize"><span class="toc-number">3.2.2.</span> <span class="toc-text">Add &amp; Normalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#feed-forward"><span class="toc-number">3.2.3.</span> <span class="toc-text">Feed Forward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#skip-connection%E5%9B%BE%E4%B8%AD%E7%9A%84%E8%99%9A%E7%BA%BF%E8%BE%93%E5%85%A5"><span class="toc-number">3.2.4.</span> <span class="toc-text">Skip
+Connection——图中的虚线输入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#decoder"><span class="toc-number">3.3.</span> <span class="toc-text">Decoder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#masked-multi-head-attention"><span class="toc-number">3.3.1.</span> <span class="toc-text">Masked Multi-Head-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-number">3.4.</span> <span class="toc-text">Output</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E8%AE%AD%E7%BB%83tricks"><span class="toc-number">4.</span> <span class="toc-text">Transformer训练Tricks</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E7%89%B9%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">Transformer特点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">5.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88"><span class="toc-number">6.</span> <span class="toc-text">Transformer面试题及答案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">7.1.</span> <span class="toc-text">整体代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E7%BD%91%E7%AB%99"><span class="toc-number">7.2.</span> <span class="toc-text">参考网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">7.3.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，完整版代码最终挑战（4/4）"/></a><div class="content"><a class="title" href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4/4）">Transformer 零基础解析教程，完整版代码最终挑战（4/4）</a><time datetime="2023-02-05T03:53:10.000Z" title="发表于 2023-02-05 11:53:10">2023-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）"/></a><div class="content"><a class="title" href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3/4）</a><time datetime="2023-01-31T09:00:10.000Z" title="发表于 2023-01-31 17:00:10">2023-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）"/></a><div class="content"><a class="title" href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）">Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2/4）</a><time datetime="2023-01-11T09:00:10.000Z" title="发表于 2023-01-11 17:00:10">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析"><img src="https://s1.ax1x.com/2023/02/04/pSyTy3q.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS231n Assignment 1 逐行解析"/></a><div class="content"><a class="title" href="/2022/12/20/CS231n-Assignment-1/" title="CS231n Assignment 1 逐行解析">CS231n Assignment 1 逐行解析</a><time datetime="2022-12-20T14:49:13.000Z" title="发表于 2022-12-20 22:49:13">2022-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"><img src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）"/></a><div class="content"><a class="title" href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1/4）</a><time datetime="2022-12-14T01:42:13.000Z" title="发表于 2022-12-14 09:42:13">2022-12-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 空之影</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
