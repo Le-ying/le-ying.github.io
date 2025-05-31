@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>我的软件项目 | 空之影的技术博客</title><meta name="author" content="空之影"><meta name="copyright" content="空之影"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="我的项目经历--目录 软件编程项目  可上传私人文档的ChatGPT Python爬取国家统计数据 app制作与安全性分析 绕过认证系统实验 手写数字识别GUI 弱监督条件下的点云语义理解 疫情地图小程序  可上传私人文档的ChatGPT 2023.6  描述： 搭建一个支持上传自定义知识库的ChatGPT（包含文档如 docx, txt, pdf, jpg等等，甚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的软件项目">
+<meta property="og:url" content="https://le-ying.github.io/2025/05/31/%E6%88%91%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="空之影的技术博客">
+<meta property="og:description" content="我的项目经历--目录 软件编程项目  可上传私人文档的ChatGPT Python爬取国家统计数据 app制作与安全性分析 绕过认证系统实验 手写数字识别GUI 弱监督条件下的点云语义理解 疫情地图小程序  可上传私人文档的ChatGPT 2023.6  描述： 搭建一个支持上传自定义知识库的ChatGPT（包含文档如 docx, txt, pdf, jpg等等，甚">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/zeying-gong/web-img/raw/main/Experience/app2.png">
+<meta property="article:published_time" content="2025-05-31T03:10:23.000Z">
+<meta property="article:modified_time" content="2025-05-31T14:55:40.820Z">
+<meta property="article:author" content="空之影">
+<meta property="article:tag" content="科研">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/zeying-gong/web-img/raw/main/Experience/app2.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://le-ying.github.io/2025/05/31/%E6%88%91%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"W5J7GO3HT8","apiKey":"53b7d5d068605c78d1a20d7f3671629a","indexName":"test_serika","hits":{"per_page":3},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '我的软件项目',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-31 22:55:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/CodeByZach/pace/themes/green/pace-theme-flash.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="空之影的技术博客" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/coder.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/zeying-gong/web-img/raw/main/Experience/app2.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">空之影的技术博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">我的软件项目</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-31T03:10:23.000Z" title="发表于 2025-05-31 11:10:23">2025-05-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-31T14:55:40.820Z" title="更新于 2025-05-31 22:55:40">2025-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="我的软件项目"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="我的项目经历--目录">我的项目经历--目录</h1>
+<h2 id="软件编程项目">软件编程项目</h2>
+<ol type="1">
+<li><a href="#ChatGPT">可上传私人文档的ChatGPT</a></li>
+<li><a href="#Python">Python爬取国家统计数据</a></li>
+<li><a href="#app">app制作与安全性分析</a></li>
+<li><a href="#safety">绕过认证系统实验</a></li>
+<li><a href="#GUI">手写数字识别GUI</a></li>
+<li><a href="#pointcloud">弱监督条件下的点云语义理解</a></li>
+<li><a href="#map">疫情地图小程序</a></li>
+</ol>
+<h2
+id="可上传私人文档的chatgpt"><a name='ChatGPT'></a>可上传私人文档的ChatGPT</h2>
+<p>2023.6</p>
+<hr />
+<h3 id="描述"><a name='-1'></a>描述：</h3>
+<p>搭建一个支持上传自定义知识库的ChatGPT（包含文档如 docx, txt, pdf,
+jpg等等，甚至可以直接上传文件夹），支持中英双语。采用的解决方案是Longchain+ChatGLM</p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）阿里云机器学习PAI平台</p>
+<p>ChatGLM的参数量（80亿）比正版GPT-3（1750亿）要少，所以可以下载到本地运行，支持中英双语，并且可以通过源代码更换各部分API接口，硬件配置最低要求为
+6 GB显存的GPU。</p>
+<table>
+<thead>
+<tr class="header">
+<th>量化等级</th>
+<th>最低 GPU 显存（推理）</th>
+<th>最低 GPU 显存（高效参数微调）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FP16（无量化）</td>
+<td>13 GB</td>
+<td>14 GB</td>
+</tr>
+<tr class="even">
+<td>INT8</td>
+<td>8 GB</td>
+<td>9 GB</td>
+</tr>
+<tr class="odd">
+<td>INT4</td>
+<td>6 GB</td>
+<td>7 GB</td>
+</tr>
+</tbody>
+</table>
+<p>如果手头的硬件条件暂时不满足，而且想要免费使用，可以考虑白嫖阿里云的机器学习
+PAI 平台，使用 A10 显卡，免费试用活动页 <a
+target="_blank" rel="noopener" href="https://free.aliyun.com/">https://free.aliyun.com/</a>，申请教程可以参考
+<a
+target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ymAsufnnk5tbUNobmgNtBw">https://mp.weixin.qq.com/s/ymAsufnnk5tbUNobmgNtBw</a></p>
+<p>（2）Python -- 实现算法逻辑</p>
+<p>项目实现原理如下图所示，过程包括加载文件 -&gt; 读取文本 -&gt;
+文本分割 -&gt; 文本向量化 -&gt; 问句向量化 -&gt;
+在文本向量中匹配出与问句向量最相似的top k个文本 -&gt;
+匹配出的文本作为上下文和问题一起添加到 prompt 中 -&gt; 提交给 LLM
+生成回答。</p>
+<p><img
+src="https://github.com/imClumsyPanda/langchain-ChatGLM/raw/master/img/langchain+chatglm.png" /></p>
+<p>从文档处理角度来看，实现流程如下：</p>
+<p><img
+src="https://github.com/imClumsyPanda/langchain-ChatGLM/raw/master/img/langchain+chatglm2.png" /></p>
+<h3 id="成绩"><a name='-1'></a>成绩：</h3>
+<p>做了一个演示视频</p>
+<p><iframe height=498 width=510 src="//player.bilibili.com/player.html?aid=529428129&bvid=BV1uu411W779&cid=1153998729&page=1" frameborder=0 allowfullscreen></iframe></p>
+<h2
+id="python爬取国家统计数据"><a name='Python'></a>Python爬取国家统计数据</h2>
+<p>2021.1</p>
+<hr />
+<h3 id="描述-1"><a name='-1'></a>描述：</h3>
+<p>独立完成，爬取“国家统计局”八个省份、六个季度的城乡居民收支基本情况</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/crawl%20mind.jpg" /></p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/crawl2.jpg" /></p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）Python -- 通过panda库实现爬虫功能，通过xlwings库实现表格处理</p>
+<h3 id="成绩-1"><a name='-1'></a>成绩：</h3>
+<p>爬取国家统计局八个省份、六个季度的表格数据到excel表格中，同时代码可筛去无效数据，自动整理excel表格，通过xlwings库实现数据居中、自适应列宽等功能。</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/crawl3.jpg" /></p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/crawl4.jpg" /></p>
+<h2 id="app制作与安全性分析"><a name='app'></a>app制作与安全性分析</h2>
+<p>2019.10 - 2020.1</p>
+<hr />
+<h3 id="描述-2"><a name='-1'></a>描述：</h3>
+<p>app实现要求:该app具有用户/口令登录功能，并可供使用者注册。注册时口令只作长度限制（如8位长度），但强度暂不作要求。用户名/口令保存在手机上，口令保存时作加密处理（自行选择加密算法）。</p>
+<p>功能比较简单，弹出一浮窗，显示app需要获取存储空间、设备信息、地理位置权限的提示，可选择授权或拒绝。通过在手机上运行此app，注册若干个账号，口令设置时有强口令，也有弱口令，然后分析其安全性，加以改进。</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app1.png" /></p>
+<p>客户端登录功能的相关代码（Kotlin）：</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app2.png" /></p>
+<p>获取存储空间、设备信息、地理位置权限这些权限的相关语句：</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app3.png" /></p>
+<p>Androbugs分析截图：</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app5.png" /></p>
+<p>分析后修改了原有app的注册/登录认证方式，采用OAuth2规范中的授权码模式：</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app6.png" /></p>
+<p>将外部存储改为内部存储：</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/app7.png" /></p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）Kotlin -- 通过Android Studio实现app功能 （2）Androbugs --
+分析app安全性</p>
+<h3 id="成绩-2"><a name='-1'></a>成绩：</h3>
+<p>完整的运行视频如下：</p>
+<p><iframe height=498 width=510 src='https://player.youku.com/embed/XNDg0MTQwNjUwOA==' frameborder=0 allowfullscreen></iframe></p>
+<h2 id="绕过认证系统实验"><a name='safety'></a>绕过认证系统实验</h2>
+<p>2019.9</p>
+<hr />
+<h3 id="描述-3"><a name='-1'></a>描述：</h3>
+<p>很多商场、饭店的商业WIFI采用了WEB
+Portal认证方式，但有些认证系统存在漏洞，可以利用 DNS TUNNEL
+绕过网关计费系统。存在这种漏洞的商业WIFI环境，并且可验证能够利用 DNS
+TUNNEL 穿越网关计费系统。</p>
+<p>DNS
+Tunnel真正用来“免密上网”，其实不太实际。尽管我们组已经“砍掉了”云服务器的开支（把代理服务器搬到本地来进行了），结果整个实验还是花掉了6块钱来购买域名。</p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）树莓派 -- 搭建本地代理服务器 （2）Portal --
+拓扑结构分析和DNS仿真配置</p>
+<h3 id="成绩-3"><a name='-1'></a>成绩：</h3>
+<p>整个实验其实是告诉我们：黑客会“见缝插针”，DNS这样专门用于域名查询的协议，也可以被拿来传输数据。若将来需要做网络应用层的协议设计、维护工作，一定要加倍小心，在网络安全方面要非常谨慎。另外对于个人来说，如果连接到公共网络，一定要提高警惕，谨防“高科技偷窃”，因为我们难以知道黑客下一个目标是哪里。</p>
+<iframe height="498" width="510" src="https://player.youku.com/embed/XNDg5NzI1OTY0OA==" frameborder="0" allowfullscreen>
+</iframe>
+<h2 id="手写数字识别gui"><a name='GUI'></a>手写数字识别GUI</h2>
+<p>2020.11 - 2021.1</p>
+<hr />
+<h3 id="描述-4"><a name='-1'></a>描述：</h3>
+<p>不使用框架，实现手写数字识别GUI开发</p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）Python --
+开发GUI界面（基于Qt5），涉及基本bp算法实现和正则化（BN，L2正则化，RMSProp）等优化算法，并实现pyqt界面及三个功能:mnist中抽取识别,上传图片识别,画板手写识别</p>
+<h3 id="成绩-4"><a name='-1'></a>成绩：</h3>
+<p><iframe height=498 width=510 src='https://player.youku.com/embed/XNDg0MTAwMDg3Mg==' frameborder=0 allowfullscreen></iframe></p>
+<h2
+id="弱监督条件下的点云语义理解"><a name='pointcloud'></a>弱监督条件下的点云语义理解</h2>
+<p>2020.10 - 2021.1</p>
+<hr />
+<h3 id="描述-5"><a name='-1'></a>描述：</h3>
+<p>为解决三维点云语义分割中数据标注昂贵的问题，尝试使用弱监督学习的方法进行研究。进行了论文综述，同时复现了“PointNet++”代码。</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/pointcloud%20mind.png" /></p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）Python -- 通过Jupyter Notebook复现代码</p>
+<h3 id="成绩-5"><a name='-1'></a>成绩：</h3>
+<p>基于百度AI平台的PaddlePaddle框架，对十组家具图片生成的无序点云进行分类处理，复现了“PointNet++”论文中91.9%的准确率。</p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/point%20cloud2.jpg" /></p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/point%20cloud3.jpg" /></p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/point%20cloud4.jpg" /></p>
+<p><img
+src="https://github.com/serika-onoe/web-img/raw/main/Experience/point%20cloud5.jpg" /></p>
+<h2 id="疫情地图小程序"><a name='map'></a>疫情地图小程序</h2>
+<p>2020.6</p>
+<hr />
+<h3 id="描述-6"><a name='-1'></a>描述：</h3>
+<p>疫情期间做的一个疫情地图，分为国内、国外两个板块，每个板块分为当日累计疫情、当日新增疫情两个子板块，引用了开课吧的数据源，颜色越深说明感染人数越多。</p>
+<p>用到的编程语言和软件工具有：</p>
+<p>（1）html -- 引用开课吧数据源，尝试进行数字可视化</p>
+<h3 id="成绩-6"><a name='-1'></a>成绩：</h3>
+<iframe height="498" width="510" src="https://player.youku.com/embed/XNDg5NzI4NDU0MA==" frameborder="0" allowfullscreen>
+</iframe>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a></div><div class="post_share"><div class="social-share" data-image="https://github.com/zeying-gong/web-img/raw/main/Experience/app2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/05/31/%E6%88%91%E7%9A%84%E7%A1%AC%E4%BB%B6%E9%A1%B9%E7%9B%AE/"><img class="prev-cover" src="https://github.com/zeying-gong/web-img/raw/main/Experience/gps.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">我的硬件项目</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/09/%20Habitat%E9%85%8D%E7%BD%AE/"><img class="next-cover" src="https://github.com/serika-onoe/web-img/raw/main/habitat_configuration/figure2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Habitat 3.0 环境配置及报错完美解决（含Linux、MacOS系统）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/05/31/%E6%88%91%E7%9A%84%E7%A1%AC%E4%BB%B6%E9%A1%B9%E7%9B%AE/" title="我的硬件项目"><img class="cover" src="https://github.com/zeying-gong/web-img/raw/main/Experience/gps.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-31</div><div class="title">我的硬件项目</div></div></a></div><div><a href="/2022/12/14/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%88%E5%89%8D%E8%A8%80%EF%BC%89/" title="Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/attention.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-14</div><div class="title">Transformer 零基础解析教程，从Encoder-Decoder架构说起（1&#x2F;4）</div></div></a></div><div><a href="/2023/01/11/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" title="Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/transformer.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">Transformer 零基础解析教程，剥洋葱般层层剖析内在原理（2&#x2F;4）</div></div></a></div><div><a href="/2023/01/31/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/" title="Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/simpletransformers-logo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-31</div><div class="title">Transformer 零基础解析教程，牛刀小试Pytorch简易版攻略（3&#x2F;4）</div></div></a></div><div><a href="/2023/02/05/Transformer%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E8%A7%A3%E6%9E%90%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/" title="Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）"><img class="cover" src="https://github.com/serika-onoe/web-img/raw/main/Transformer/harvard.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Transformer 零基础解析教程，完整版代码最终挑战（4&#x2F;4）</div></div></a></div><div><a href="/2024/01/08/%20%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" title="“Embodied AI”前言 -- 婴儿给AI时代的六个启示"><img class="cover" src="https://github.com/Zeying-Gong/web-img/raw/main/babies/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-08</div><div class="title">“Embodied AI”前言 -- 婴儿给AI时代的六个启示</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/coder.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">空之影</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zeying-gong" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.linkedin.com/in/zeying-gong" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a><a class="social-icon" href="mailto:zgong313@connect.hkust-gz.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://twitter.com/KungRikhard" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人学术主页已更新，可点击顶部导航栏的“关于我”选项查看，欢迎合作交流~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86--%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">我的项目经历--目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%BC%96%E7%A8%8B%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">软件编程项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E4%B8%8A%E4%BC%A0%E7%A7%81%E4%BA%BA%E6%96%87%E6%A1%A3%E7%9A%84chatgpt"><span class="toc-number">1.2.</span> <span class="toc-text">可上传私人文档的ChatGPT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9"><span class="toc-number">1.2.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E7%88%AC%E5%8F%96%E5%9B%BD%E5%AE%B6%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">Python爬取国家统计数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#app%E5%88%B6%E4%BD%9C%E4%B8%8E%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.4.</span> <span class="toc-text">app制作与安全性分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">1.4.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E8%AE%A4%E8%AF%81%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.5.</span> <span class="toc-text">绕过认证系统实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">1.5.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-3"><span class="toc-number">1.5.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%ABgui"><span class="toc-number">1.6.</span> <span class="toc-text">手写数字识别GUI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-4"><span class="toc-number">1.6.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-4"><span class="toc-number">1.6.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%9D%A1%E4%BB%B6%E4%B8%8B%E7%9A%84%E7%82%B9%E4%BA%91%E8%AF%AD%E4%B9%89%E7%90%86%E8%A7%A3"><span class="toc-number">1.7.</span> <span class="toc-text">弱监督条件下的点云语义理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-5"><span class="toc-number">1.7.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-5"><span class="toc-number">1.7.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%96%AB%E6%83%85%E5%9C%B0%E5%9B%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.8.</span> <span class="toc-text">疫情地图小程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-6"><span class="toc-number">1.8.1.</span> <span class="toc-text">描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E7%BB%A9-6"><span class="toc-number">1.8.2.</span> <span class="toc-text">成绩：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/05/31/%E6%88%91%E7%9A%84%E7%A1%AC%E4%BB%B6%E9%A1%B9%E7%9B%AE/" title="我的硬件项目"><img src="https://github.com/zeying-gong/web-img/raw/main/Experience/gps.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我的硬件项目"/></a><div class="content"><a class="title" href="/2025/05/31/%E6%88%91%E7%9A%84%E7%A1%AC%E4%BB%B6%E9%A1%B9%E7%9B%AE/" title="我的硬件项目">我的硬件项目</a><time datetime="2025-05-31T13:21:53.000Z" title="发表于 2025-05-31 21:21:53">2025-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/31/%E6%88%91%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE/" title="我的软件项目"><img src="https://github.com/zeying-gong/web-img/raw/main/Experience/app2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我的软件项目"/></a><div class="content"><a class="title" href="/2025/05/31/%E6%88%91%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE/" title="我的软件项目">我的软件项目</a><time datetime="2025-05-31T03:10:23.000Z" title="发表于 2025-05-31 11:10:23">2025-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/09/%20Habitat%E9%85%8D%E7%BD%AE/" title="Habitat 3.0 环境配置及报错完美解决（含Linux、MacOS系统）"><img src="https://github.com/serika-onoe/web-img/raw/main/habitat_configuration/figure2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Habitat 3.0 环境配置及报错完美解决（含Linux、MacOS系统）"/></a><div class="content"><a class="title" href="/2024/01/09/%20Habitat%E9%85%8D%E7%BD%AE/" title="Habitat 3.0 环境配置及报错完美解决（含Linux、MacOS系统）">Habitat 3.0 环境配置及报错完美解决（含Linux、MacOS系统）</a><time datetime="2024-01-09T02:57:00.000Z" title="发表于 2024-01-09 10:57:00">2024-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/08/%20%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" title="“Embodied AI”前言 -- 婴儿给AI时代的六个启示"><img src="https://github.com/Zeying-Gong/web-img/raw/main/babies/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="“Embodied AI”前言 -- 婴儿给AI时代的六个启示"/></a><div class="content"><a class="title" href="/2024/01/08/%20%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" title="“Embodied AI”前言 -- 婴儿给AI时代的六个启示">“Embodied AI”前言 -- 婴儿给AI时代的六个启示</a><time datetime="2024-01-08T15:38:00.000Z" title="发表于 2024-01-08 23:38:00">2024-01-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/11/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/" title="同步电脑端和手机端日历教程（基于Outlook邮箱）"><img src="https://github.com/Zeying-Gong/web-img/raw/main/background/coder_openai.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="同步电脑端和手机端日历教程（基于Outlook邮箱）"/></a><div class="content"><a class="title" href="/2023/10/11/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/" title="同步电脑端和手机端日历教程（基于Outlook邮箱）">同步电脑端和手机端日历教程（基于Outlook邮箱）</a><time datetime="2023-10-11T14:28:00.000Z" title="发表于 2023-10-11 22:28:00">2023-10-11</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 空之影</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://rbmbrain.me/',
+      region: 'ap-east-1',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://rbmbrain.me/',
+      region: 'ap-east-1',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer src="https://cdn.jsdelivr.net/gh/CodeByZach/pace/pace.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
