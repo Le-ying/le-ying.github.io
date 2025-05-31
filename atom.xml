@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>空之影的技术博客</title>
+  <title>张乐盈的技术博客</title>
   
   <subtitle>欢迎来到我的博客!</subtitle>
   <link href="https://le-ying.github.io/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://le-ying.github.io/</id>
   
   <author>
-    <name>空之影</name>
+    <name>张乐盈</name>
     
   </author>
   
